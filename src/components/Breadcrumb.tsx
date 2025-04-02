@@ -1,7 +1,7 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-export function Breadcrumb({ items, separator = "/", className }) {
+export function BreadCrumb({ items, separator = "/", className }) {
   return (
     <nav className={twMerge("flex items-center text-sm text-gray-600", className)} aria-label="Breadcrumb">
       {items.map((item, index) => (

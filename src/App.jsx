@@ -6,7 +6,7 @@ import { Alert } from './components/Alert';
 import { AlertDialog } from './components/AlertDialog';
 import { Avatar } from "./components/Avatar";
 import { Badge } from "./components/Badge";
-import { Breadcrumb } from './components/BreadCrumb';
+import { BreadCrumb } from './components/BreadCrumb';
 import { Calendar } from "./components/Calendar";
 import { Checkbox } from "./components/Checkbox";
 import { Datepicker } from "./components/Datepicker";
@@ -59,7 +59,7 @@ function App() {
     variants={<div className="flex space-x-2"><Button variant={'success'}>Success</Button><Button variant={'warning'}>Warning</Button><Button variant={'destructive'}>Destructive</Button><Button variant={'outline'}>Outline</Button><Button variant={'ghost'}>Ghost</Button><Button variant={'link'}>Link</Button></div>}
   />, 
     Badges: <ComponentShowcase title="Badges" preview={<Badge text="Success" variant="success" />} code={`<Badge text="Success" variant="success" />`} variants={<><Badge text="Warning" variant="warning" /><Badge text="Danger" variant="danger" /></>} />, 
-    Breadcrumb: <ComponentShowcase title="Breadcrumb" preview={<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }]} />} code={`<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }]} />`} variants={<Breadcrumb items={[{ label: "Dashboard", href: "/dashboard" }, { label: "Settings", href: "/settings" }]} separator=">" />} />,
+    BreadCrumb: <ComponentShowcase title="BreadCrumb" preview={<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }]} />} code={`<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }]} />`} variants={<BreadCrumb items={[{ label: "Dashboard", href: "/dashboard" }, { label: "Settings", href: "/settings" }]} separator=">" />} />,
     Calendar: <ComponentShowcase title="Calendar" preview={<Calendar />} code={`<Calendar />`} variants={<Calendar minDate={new Date()} />} />, 
     Checkbox: <ComponentShowcase title="Checkbox" preview={<Checkbox label="Accept Terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />} code={`<Checkbox label="Accept Terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />`} variants={<Checkbox label="Subscribe" />} />, 
     Datepicker: <ComponentShowcase title="Datepicker" preview={<Datepicker value={date} onChange={setDate} />} code={`<Datepicker value={date} onChange={setDate} />`} variants={<Datepicker value={date} onChange={setDate} minDate={new Date()} />} />, 
