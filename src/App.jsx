@@ -6,7 +6,7 @@ import { Alert } from './components/Alert';
 import { AlertDialog } from './components/AlertDialog';
 import { Avatar } from "./components/Avatar";
 import { Badge } from "./components/Badge";
-import { BreadCrumb } from './components/BreadCrumb';
+import { BreadCrumb } from './components/Breadcrumb';
 import { Calendar } from "./components/Calendar";
 import { Checkbox } from "./components/Checkbox";
 import { Datepicker } from "./components/Datepicker";
