@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from './components/Button';
 import { Accordion } from './components/Accordion';
 import { Alert } from './components/Alert';
@@ -11,7 +11,7 @@ import { Calendar } from "./components/Calendar";
 import { Checkbox } from "./components/Checkbox";
 import { Datepicker } from "./components/Datepicker";
 import { Dropdown } from "./components/Dropdown";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiMoon, FiSun, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -41,6 +41,16 @@ function App() {
   const [selected, setSelected] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const components = {
     Accordion: <ComponentShowcase title="Accordion" preview={<Accordion title="Example" variant="primary">Content</Accordion>} code={`<Accordion title="Example" variant="primary">Content</Accordion>`} variants={<Accordion title="Alternative" variant="secondary">Different Look</Accordion>} />, 
@@ -52,7 +62,7 @@ function App() {
       variants={<><Button onClick={() => setIsDialogOpen(true)}>Trigger Danger Dialog</Button><AlertDialog isOpen={isDialogOpen} title="Danger" description="This action is irreversible!" onClose={() => setIsDialogOpen(false)} /></>} 
     />,
     Avatar: <ComponentShowcase title="Avatar" preview={<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />} code={`<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`} variants={<><Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="lg" /><Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="xl" /></>} />, 
-    Buttons: <ComponentShowcase 
+    Button: <ComponentShowcase 
     title="Buttons" 
     preview={<div className="flex space-x-2"><Button variant={'primary'}>Primary</Button><Button variant={'secondary'}>Secondary</Button></div>} 
     code={`<Button variant={'primary'}>Primary</Button>\n<Button variant={'secondary'}>Secondary</Button>`}
@@ -68,24 +78,34 @@ function App() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <aside className={`bg-white shadow-lg p-6 transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-16'}`}>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="mb-4 p-2 bg-blue-500 text-white rounded flex items-center">
+      <aside className={`bg-white shadow-lg p-6 transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'}`}>
+        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="cursor-pointer mb-2 p-2 bg-black text-white rounded flex items-center">
           {isSidebarOpen ? <FiChevronLeft size={20} /> : <FiChevronRight size={20} />}
         </button>
         {isSidebarOpen && (
           <>
-            <h2 className="text-xl font-semibold mb-4">Component Showcase</h2>
+          <img className="px-6 py-6" src="./DruxUI/Full logo.png"/>
+            <h2 className="text-xl font-semibold mb-4">Components</h2>
             <ul className="space-y-2">
               {Object.keys(components).map((key) => (
                 <li key={key}>
-                  <button onClick={() => setSelectedComponent(key)} className={`block p-2 w-full text-left rounded ${selectedComponent === key ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}`}>{key}</button>
+                  <button onClick={() => setSelectedComponent(key)} className={`block p-2 w-full text-left rounded ${selectedComponent === key ? 'bg-black text-white' : 'hover:bg-gray-200'}`}>{key}</button>
                 </li>
               ))}
             </ul>
           </>
         )}
       </aside>
-      <main className="flex-1 p-6 overflow-auto">
+      <main className="flex-1 p-6 overflow-auto relative">
+        {/* Theme Toggle Button */}
+        <button 
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")} 
+          className="absolute top-6 right-6 p-2 bg-gray-200 dark:bg-gray-700 rounded-full transition-all"
+        >
+          {theme === "light" ? <FiMoon size={24} className="text-gray-800" /> : <FiSun size={24} className="text-yellow-400" />}
+        </button>
+
+        {/* Component Showcase */}
         {components[selectedComponent]}
       </main>
     </div>

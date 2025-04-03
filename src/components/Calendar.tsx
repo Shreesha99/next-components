@@ -11,23 +11,22 @@ interface CalendarProps {
 
 export function Calendar({ className, minDate, maxDate }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDate, setSelectedDate] = useState(dayjs()); // Track selected date
+  const [selectedDate, setSelectedDate] = useState(dayjs()); 
   const today = dayjs();
 
   const startOfMonth = currentDate.startOf("month");
   const daysInMonth = currentDate.daysInMonth();
-  const firstDayOfWeek = startOfMonth.day(); // 0 (Sunday) - 6 (Saturday)
+  const firstDayOfWeek = startOfMonth.day(); 
 
   const prevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
   const nextMonth = () => setCurrentDate(currentDate.add(1, "month"));
 
-  // Generate days for the calendar
-  const days = new Array(firstDayOfWeek).fill(null); // Empty spaces before 1st of the month
+  const days = new Array(firstDayOfWeek).fill(null); 
   for (let i = 1; i <= daysInMonth; i++) days.push(i);
 
   return (
     <div className={twMerge("p-4 bg-white shadow-lg rounded-lg w-80", className)}>
-      {/* Month Selector */}
+
       <div className="flex justify-between items-center mb-4">
         <button onClick={prevMonth} className="p-1 rounded hover:bg-gray-200">
           <ChevronLeft size={20} />
@@ -38,14 +37,12 @@ export function Calendar({ className, minDate, maxDate }: CalendarProps) {
         </button>
       </div>
 
-      {/* Weekdays */}
       <div className="grid grid-cols-7 gap-1 text-center text-gray-600 text-sm font-medium">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div key={day} className="p-2">{day}</div>
         ))}
       </div>
 
-      {/* Days Grid */}
       <div className="grid grid-cols-7 gap-1 text-center mt-2">
         {days.map((day, index) => {
           if (day === null) return <div key={index} className="opacity-0">.</div>;
@@ -58,15 +55,15 @@ export function Calendar({ className, minDate, maxDate }: CalendarProps) {
           return (
             <div
               key={index}
-              onClick={() => !isDisabled && setSelectedDate(date)} // Select only if not disabled
+              onClick={() => !isDisabled && setSelectedDate(date)} 
               className={twMerge(
                 "p-2 rounded cursor-pointer transition",
                 isDisabled
-                  ? "text-gray-400 cursor-not-allowed" // Disabled Date
+                  ? "text-gray-400 cursor-not-allowed" 
                   : isSelected
-                  ? "bg-blue-600 text-white font-bold" // Selected Date
+                  ? "bg-black text-white font-bold" 
                   : isToday
-                  ? "bg-gray-200 text-black" // Subtle Today Highlight
+                  ? "bg-gray-200 text-black" 
                   : "hover:bg-gray-100"
               )}
             >
