@@ -1,11 +1,25 @@
 {
-  "name": "next-components",
-  "private": true,
+  "name": "drux-ui",
+  "version": "1.0.0",
+  "description": "A beautiful, reusable component library for React apps built with TailwindCSS",
+  "author": "Shreesha Venkatram",
+  "license": "MIT",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "start": "vite --port 3000",
-    "build": "vite build",
+    "build": "tsup src/index.ts --dts --format esm,cjs --out-dir dist",
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -19,6 +33,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.9",
+    "drux-ui": "^1.0.0",
     "lucide-react": "^0.487.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -35,6 +50,7 @@
     "eslint": "^8.45.0",
     "jsdom": "^26.0.0",
     "prettier": "^3.0.0",
+    "tsup": "^7.2.0",
     "typescript": "^5.7.2",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",

@@ -1,16 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router';
 import React, { useState, useEffect } from "react";
-import { Button } from './components/Button';
-import { Accordion } from './components/Accordion';
-import { Alert } from './components/Alert';
-import { AlertDialog } from './components/AlertDialog';
-import { Avatar } from "./components/Avatar";
-import { Badge } from "./components/Badge";
-import { BreadCrumb } from './components/Breadcrumb';
-import { Calendar } from "./components/Calendar";
-import { Checkbox } from "./components/Checkbox";
-import { Datepicker } from "./components/Datepicker";
-import { Dropdown } from "./components/Dropdown";
+import { Button } from 'drux-ui';
+import { Accordion } from 'drux-ui';
+import { Alert } from 'drux-ui';
+import { AlertDialog } from 'drux-ui';
+import { Avatar } from 'drux-ui';
+import { Badge } from 'drux-ui';
+import { BreadCrumb } from 'drux-ui';
+import { Calendar } from 'drux-ui';
+import { Checkbox } from 'drux-ui';
+import { Datepicker } from 'drux-ui';
+import { Dropdown } from 'drux-ui';
 import { FiMoon, FiSun, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export const Route = createFileRoute('/')({
@@ -97,15 +97,13 @@ function App() {
         )}
       </aside>
       <main className="flex-1 p-6 overflow-auto relative">
-        {/* Theme Toggle Button */}
         <button 
           onClick={() => setTheme(theme === "light" ? "dark" : "light")} 
-          className="absolute top-6 right-6 p-2 bg-gray-200 dark:bg-gray-700 rounded-full transition-all"
+          className="absolute top-6 right-6 p-2 bg-gray-200 rounded-full transition-all"
         >
           {theme === "light" ? <FiMoon size={24} className="text-gray-800" /> : <FiSun size={24} className="text-yellow-400" />}
         </button>
 
-        {/* Component Showcase */}
         {components[selectedComponent]}
       </main>
     </div>
