@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://druxui.s3.ap-south-1.amazonaws.com/just-logo-dark.png" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Next js light weight components" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Drux UI</title>
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme") || "light";
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-CndVCbw7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CAt0L6kB.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
