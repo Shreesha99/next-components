@@ -3,7 +3,7 @@ export { Alert } from "./lib/components/Alert";
 export { AlertDialog } from "./lib/components/AlertDialog";
 export { Avatar } from "./lib/components/Avatar";
 export { Badge } from "./lib/components/Badge";
-export { BreadCrumb } from "./lib/components/Breadcrumb";
+export { BreadCrumb } from "./lib/components/BreadCrumb";
 export { Button } from "./lib/components/Button";
 export { Calendar } from "./lib/components/Calendar";
 export { Carousel } from "./lib/components/Carousel";
