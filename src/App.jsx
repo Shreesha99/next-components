@@ -649,13 +649,15 @@ function App() {
       {/* Top Navbar */}
       <header className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 py-4 z-50 px-20 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         {/* Logo + Name */}
-        <div className="flex items-center space-x-3">
-          <img
-            src="https://druxui.s3.ap-south-1.amazonaws.com/just-logo.png"
-            alt="Drux UI Logo"
-            className="h-8"
-          />
-          <span className="text-lg font-semibold">Drux UI</span>
+        <div>
+          <a href="#" className="flex items-center space-x-3">
+            <img
+              src="https://druxui.s3.ap-south-1.amazonaws.com/just-logo.png"
+              alt="Drux UI Logo"
+              className="h-8"
+            />
+            <span className="text-lg font-semibold">Drux UI</span>
+          </a>
         </div>
 
         {/* Search Bar */}
@@ -764,7 +766,7 @@ function App() {
             </>
           )}
         </aside>
-        <main className="flex-1 p-6 overflow-auto relative scrollbar-hide py-20 border-r border-dotted border-gray-300">
+        <main className="flex-1 overflow-auto relative scrollbar-hide py-25 px-6 border-r border-dotted border-gray-300">
           {introduction[selectedComponent] || components[selectedComponent]}
         </main>
       </div>
