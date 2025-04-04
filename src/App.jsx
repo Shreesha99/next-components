@@ -84,7 +84,7 @@ function App() {
         </button>
         {isSidebarOpen && (
           <>
-          <img className="px-6 py-6" src="./DruxUI/Full logo.png"/>
+          <img className="px-6 py-6" src="https://druxui.s3.ap-south-1.amazonaws.com/full-logo.png"/>
             <h2 className="text-xl font-semibold mb-4">Components</h2>
             <ul className="space-y-2">
               {Object.keys(components).map((key) => (
