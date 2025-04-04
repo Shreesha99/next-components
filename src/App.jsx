@@ -21,6 +21,8 @@ import { Calendar } from "@/lib/components/Calendar";
 import { Checkbox } from "@/lib/components/Checkbox";
 import { Datepicker } from "@/lib/components/Datepicker";
 import { Dropdown } from "@/lib/components/Dropdown";
+import { Input } from "@/lib/components/Input";
+import { OtpInput } from "@/lib/components/OtpInput";
 
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
@@ -98,6 +100,8 @@ function App() {
       </div>
     );
   }`;
+
+  const [otp, setOtp] = useState("");
 
   const introduction = {
     Welcome: (
@@ -592,6 +596,35 @@ function App() {
             onSelect={setSelected}
           />
         }
+      />
+    ),
+    Input: (
+      <ComponentShowcase
+        title="Input"
+        preview={
+          <div className="space-y-2">
+            <Input variant="primary" placeholder="Primary Input" />
+            <Input variant="secondary" placeholder="Secondary Input" />
+          </div>
+        }
+        code={`<Input variant="primary" placeholder="Primary Input" />\n<Input variant="secondary" placeholder="Secondary Input" />`}
+        variants={
+          <div className="space-y-2">
+            <Input variant="success" placeholder="Success Input" />
+            <Input variant="warning" placeholder="Warning Input" />
+            <Input variant="destructive" placeholder="Destructive Input" />
+            <Input variant="ghost" placeholder="Ghost Input" />
+            <Input disabled placeholder="Disabled Input" />
+          </div>
+        }
+      />
+    ),
+    OtpInput: (
+      <ComponentShowcase
+        title="OTP Input"
+        preview={<OtpInput value={otp} onChange={setOtp} length={6} />}
+        code={`<OtpInput value={otp} onChange={setOtp} length={6} />`}
+        variants={<OtpInput value={otp} onChange={setOtp} length={4} />}
       />
     ),
   };

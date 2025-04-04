@@ -10,3 +10,5 @@ export { Carousel } from "./lib/components/Carousel";
 export { Checkbox } from "./lib/components/Checkbox";
 export { Datepicker } from "./lib/components/Datepicker";
 export { Dropdown } from "./lib/components/Dropdown";
+export { Input } from "./lib/components/Input";
+export { OtpInput } from "./lib/components/OtpInput";
