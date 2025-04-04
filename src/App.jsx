@@ -1,16 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router';
 import React, { useState, useEffect } from "react";
-import { Button } from 'drux-ui';
-import { Accordion } from 'drux-ui';
-import { Alert } from 'drux-ui';
-import { AlertDialog } from 'drux-ui';
-import { Avatar } from 'drux-ui';
-import { Badge } from 'drux-ui';
-import { BreadCrumb } from 'drux-ui';
-import { Calendar } from 'drux-ui';
-import { Checkbox } from 'drux-ui';
-import { Datepicker } from 'drux-ui';
-import { Dropdown } from 'drux-ui';
+import { Button } from '@/lib/components/Button';
+import { Accordion } from '@/lib/components/Accordion';
+import { Alert } from '@/lib/components/Alert';
+import { AlertDialog } from '@/lib/components/AlertDialog';
+import { Avatar } from '@/lib/components/Avatar';
+import { Badge } from '@/lib/components/Badge';
+import { BreadCrumb } from '@/lib/components/BreadCrumb';
+import { Calendar } from '@/lib/components/Calendar';
+import { Checkbox } from '@/lib/components/Checkbox';
+import { Datepicker } from '@/lib/components/Datepicker';
+import { Dropdown } from '@/lib/components/Dropdown';
 import { FiMoon, FiSun, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export const Route = createFileRoute('/')({
