@@ -1,6 +1,6 @@
 {
   "name": "drux-ui",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A beautiful, reusable component library for React apps built with TailwindCSS",
   "author": "Shreesha Venkatram",
   "license": "MIT",
