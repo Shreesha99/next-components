@@ -172,7 +172,7 @@ function App() {
           </ul>
         </div>
 
-        <p className="text-sm pt-4">
+        <p className="text-sm pt-4 font-bold">
           🚧 Drux UI is under active development. New components and
           improvements are added regularly. Stay tuned!
         </p>
@@ -190,11 +190,11 @@ function App() {
             <code>
               npm install drux-ui
               <br />
-              # or
+              or
               <br />
               yarn add drux-ui
               <br />
-              # or
+              or
               <br />
               pnpm add drux-ui
             </code>
@@ -646,6 +646,16 @@ function App() {
           >
             <Mail className="w-6 h-6" />
           </a>
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="rounded-full transition-all"
+          >
+            {theme === "light" ? (
+              <FiMoon size={24} className="text-gray-800" />
+            ) : (
+              <FiSun size={24} className="text-yellow-400" />
+            )}
+          </button>
         </div>
       </header>
 
@@ -695,16 +705,6 @@ function App() {
           )}
         </aside>
         <main className="flex-1 p-6 overflow-auto relative scrollbar-hide py-20">
-          <button
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="absolute top-6 right-6 p-2 bg-gray-200 rounded-full transition-all"
-          >
-            {theme === "light" ? (
-              <FiMoon size={24} className="text-gray-800" />
-            ) : (
-              <FiSun size={24} className="text-yellow-400" />
-            )}
-          </button>
           {introduction[selectedComponent] || components[selectedComponent]}
         </main>
       </div>
