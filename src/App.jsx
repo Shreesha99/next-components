@@ -7,6 +7,8 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiSearch,
+  FiCheck,
+  FiCopy,
 } from "react-icons/fi";
 import { Button } from "@/lib/components/Button";
 import { Accordion } from "@/lib/components/Accordion";
@@ -65,6 +67,19 @@ function App() {
     () => localStorage.getItem("theme") || "light"
   );
 
+  function useClipboard() {
+    const [copied, setCopied] = useState(false);
+
+    const copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    };
+
+    return { copied, copyToClipboard };
+  }
+  const { copied, copyToClipboard } = useClipboard();
+
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -74,9 +89,19 @@ function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  const codeSnippet = `import { Button } from 'drux-ui';
+
+  export default function App() {
+    return (
+      <div>
+        <Button variant="primary">Click Me</Button>
+      </div>
+    );
+  }`;
+
   const introduction = {
     Welcome: (
-      <section className="space-y-8 max-w-3xl">
+      <section className="space-y-8 max-w-8xl">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold">👋 Welcome to Drux UI</h1>
           <p className="text-base leading-relaxed">
@@ -179,24 +204,56 @@ function App() {
       </section>
     ),
     Installation: (
-      <section className="space-y-8 max-w-3xl">
+      <section className="space-y-8 max-w-8xl">
         <div className="space-y-2">
           <h2 className="text-2xl font-bold">📦 Installation</h2>
           <p className="text-base leading-relaxed">
             Drux UI is distributed as an npm package. You can install it using
             your preferred package manager:
           </p>
-          <pre className="bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
-            <code>
+          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto">
               npm install drux-ui
-              <br />
-              or
-              <br />
+              <button
+                onClick={() => copyToClipboard("npm install drux-ui")}
+                className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+              >
+                {copied ? (
+                  <FiCheck className="text-green-500 w-4 h-4" />
+                ) : (
+                  <FiCopy className="text-gray-600 w-4 h-4" />
+                )}
+              </button>
+            </code>
+          </pre>
+          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto">
               yarn add drux-ui
-              <br />
-              or
-              <br />
+              <button
+                onClick={() => copyToClipboard("yarn add drux-ui")}
+                className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+              >
+                {copied ? (
+                  <FiCheck className="text-green-500 w-4 h-4" />
+                ) : (
+                  <FiCopy className="text-gray-600 w-4 h-4" />
+                )}
+              </button>
+            </code>
+          </pre>
+          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto">
               pnpm add drux-ui
+              <button
+                onClick={() => copyToClipboard("pnpm add drux-ui")}
+                className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+              >
+                {copied ? (
+                  <FiCheck className="text-green-500 w-4 h-4" />
+                ) : (
+                  <FiCopy className="text-gray-600 w-4 h-4" />
+                )}
+              </button>
             </code>
           </pre>
         </div>
@@ -286,7 +343,7 @@ function App() {
       </section>
     ),
     Usage: (
-      <section className="space-y-6">
+      <section className="space-y-6 max-w-8xl">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold text-black">🚀 Usage</h2>
           <p className="text-black text-base">
@@ -302,17 +359,20 @@ function App() {
             </code>{" "}
             component:
           </p>
-
-          <pre className="bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
-            <code>{`import { Button } from 'drux-ui';
-    
-    export default function App() {
-      return (
-        <div>
-          <Button variant="primary">Click Me</Button>
-        </div>
-      );
-    }`}</code>
+          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto">
+              {codeSnippet}
+              <button
+                onClick={() => copyToClipboard(codeSnippet)}
+                className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+              >
+                {copied ? (
+                  <FiCheck className="text-green-500 w-4 h-4" />
+                ) : (
+                  <FiCopy className="text-gray-600 w-4 h-4" />
+                )}
+              </button>
+            </code>
           </pre>
 
           <p className="text-black text-base">
@@ -704,7 +764,7 @@ function App() {
             </>
           )}
         </aside>
-        <main className="flex-1 p-6 overflow-auto relative scrollbar-hide py-20">
+        <main className="flex-1 p-6 overflow-auto relative scrollbar-hide py-20 border-r border-dotted border-gray-300">
           {introduction[selectedComponent] || components[selectedComponent]}
         </main>
       </div>
