@@ -16,5 +16,5 @@ Reusable UI component library built with **Next.js + Tailwind CSS**.
 ```bash
 npm install drux-ui
 
-> 🎉 Version: **1.1.3**  
+> 🎉 Version: **1.1.4**  
 > ✨ New in this release: Updating readme file for npm
