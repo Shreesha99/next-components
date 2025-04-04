@@ -24,9 +24,7 @@
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write .",
-    "prepublishOnly": "cp README.npm.md README.md",
-    "postpublish": "git checkout README.md"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
