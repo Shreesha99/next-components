@@ -27,12 +27,15 @@ import { OtpInput } from "@/lib/components/OtpInput";
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
 
+  const tabs = ["preview", "code"];
+  if (variants) tabs.push("variants");
+
   return (
     <section className="mt-6">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="bg-white shadow rounded-lg p-4">
         <div className="flex border-b mb-4">
-          {["preview", "code", "variants"].map((tab) => (
+          {tabs.map((tab) => (
             <button
               key={tab}
               className={`p-2 mr-4 ${
@@ -419,7 +422,7 @@ function App() {
           </Accordion>
         }
         code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
             <code className="w-auto block whitespace-pre-wrap">
               {`<Accordion title="Default" variant="default" theme="default">
       This is the default accordion shown in the preview tab.
@@ -467,7 +470,7 @@ function App() {
         title="Alerts"
         preview={<Alert variant="success">Success Alert (Preview)</Alert>}
         code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
             <code className="w-auto block whitespace-pre-wrap">
               {`<Alert variant="success">Success Alert (Preview)</Alert>`}
             </code>
@@ -513,7 +516,7 @@ function App() {
           </>
         }
         code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
             <code className="block whitespace-pre-wrap">
               {`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
     <AlertDialog
@@ -571,7 +574,7 @@ function App() {
           </div>
         }
         code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
             <code className="w-auto block whitespace-pre-wrap">
               {`<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`}
             </code>
@@ -626,7 +629,7 @@ function App() {
           </div>
         }
         code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
             <code className="w-auto block whitespace-pre-wrap">
               {`<Button variant="default">Default</Button>`}
             </code>
@@ -661,13 +664,40 @@ function App() {
     Badges: (
       <ComponentShowcase
         title="Badges"
-        preview={<Badge text="Success" variant="success" />}
-        code={`<Badge text="Success" variant="success" />`}
+        preview={
+          <div className="flex justify-start">
+            <Badge text="Success" variant="success" />
+          </div>
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="block whitespace-pre-wrap w-auto">
+              {codeSnippet}
+            </code>
+            <button
+              onClick={() => {
+                copyToClipboard(codeSnippet);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <>
+          <div className="flex flex-col gap-3 justify-start">
+            <Badge text="Default" variant="default" />
+            <Badge text="Primary" variant="primary" />
+            <Badge text="Success" variant="success" />
             <Badge text="Warning" variant="warning" />
             <Badge text="Danger" variant="danger" />
-          </>
+          </div>
         }
       />
     ),
@@ -675,31 +705,93 @@ function App() {
       <ComponentShowcase
         title="BreadCrumb"
         preview={
-          <BreadCrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Products", href: "/products" },
-            ]}
-          />
+          <div className="flex justify-start">
+            <BreadCrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Products", href: "/products" },
+                { label: "Phones", href: "/products/phones" },
+              ]}
+            />
+          </div>
         }
-        code={`<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }]} />`}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="block whitespace-pre-wrap w-auto">
+              {`<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: "Phones", href: "/products/phones" }]} />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: "Phones", href: "/products/phones" }]} />`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <BreadCrumb
-            items={[
-              { label: "Dashboard", href: "/dashboard" },
-              { label: "Settings", href: "/settings" },
-            ]}
-            separator=">"
-          />
+          <div className="flex flex-col gap-3 justify-start">
+            <BreadCrumb
+              items={[
+                { label: "Dashboard", href: "/dashboard" },
+                { label: "Settings", href: "/dashboard/settings" },
+              ]}
+              separator=">"
+            />
+            <BreadCrumb
+              items={[
+                { label: "Blog", href: "/blog" },
+                { label: "2025", href: "/blog/2025" },
+                { label: "April", href: "/blog/2025/april" },
+              ]}
+              separator="→"
+            />
+            <BreadCrumb
+              items={[
+                { label: "Files", href: "/files" },
+                { label: "Photos", href: "/files/photos" },
+                { label: "2024", href: "/files/photos/2024" },
+              ]}
+              separator="/"
+            />
+          </div>
         }
       />
     ),
     Calendar: (
       <ComponentShowcase
         title="Calendar"
-        preview={<Calendar />}
-        code={`<Calendar />`}
-        variants={<Calendar minDate={new Date()} />}
+        preview={
+          <div className="flex justify-start">
+            <Calendar />
+          </div>
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="block whitespace-pre-wrap">{`<Calendar />`}</code>
+            <button
+              onClick={() => {
+                copyToClipboard(`<Calendar />`);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
       />
     ),
     Checkbox: (
@@ -707,22 +799,76 @@ function App() {
         title="Checkbox"
         preview={
           <Checkbox
-            label="Accept Terms"
+            label="Accept Terms & Conditions"
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
           />
         }
-        code={`<Checkbox label="Accept Terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />`}
-        variants={<Checkbox label="Subscribe" />}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Checkbox
+  label="Accept Terms"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>`}
+            </code>
+            <button
+              onClick={() => {
+                copyToClipboard(
+                  `<Checkbox
+  label="Accept Terms"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>`
+                );
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
+        variants={
+          <div className="flex flex-col gap-4">
+            <Checkbox label="Default" />
+            <Checkbox label="Checked by Default" checked readOnly />
+            <Checkbox label="Disabled" disabled />
+            <Checkbox />
+          </div>
+        }
       />
     ),
     Datepicker: (
       <ComponentShowcase
         title="Datepicker"
         preview={<Datepicker value={date} onChange={setDate} />}
-        code={`<Datepicker value={date} onChange={setDate} />`}
-        variants={
-          <Datepicker value={date} onChange={setDate} minDate={new Date()} />
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Datepicker value={date} onChange={setDate} />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Datepicker value={date} onChange={setDate} />`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied === "Datepicker" ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
         }
       />
     ),
@@ -731,18 +877,35 @@ function App() {
         title="Dropdown"
         preview={
           <Dropdown
-            options={["Option 1", "Option 2", "Option 3"]}
+            options={["Apple", "Banana", "Cherry"]}
             selected={selected}
             onSelect={setSelected}
           />
         }
-        code={`<Dropdown options={["Option 1", "Option 2", "Option 3"]} selected={selected} onSelect={setSelected} />`}
-        variants={
-          <Dropdown
-            options={["A", "B", "C"]}
-            selected={selected}
-            onSelect={setSelected}
-          />
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Dropdown
+      options={["Apple", "Banana", "Cherry"]}
+      selected={selected}
+      onSelect={setSelected}
+    />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Dropdown options={["Apple", "Banana", "Cherry"]} selected={selected} onSelect={setSelected} />`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied === "Dropdown" ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
         }
       />
     ),
@@ -750,19 +913,38 @@ function App() {
       <ComponentShowcase
         title="Input"
         preview={
-          <div className="space-y-2">
-            <Input variant="primary" placeholder="Primary Input" />
-            <Input variant="secondary" placeholder="Secondary Input" />
+          <div className="flex gap-3">
+            <Input placeholder="Default input" />
           </div>
         }
-        code={`<Input variant="primary" placeholder="Primary Input" />\n<Input variant="secondary" placeholder="Secondary Input" />`}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Input placeholder="Default input" />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Input placeholder="Default input" />\n<Input placeholder="Disabled input" disabled />`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <div className="space-y-2">
-            <Input variant="success" placeholder="Success Input" />
-            <Input variant="warning" placeholder="Warning Input" />
-            <Input variant="destructive" placeholder="Destructive Input" />
-            <Input variant="ghost" placeholder="Ghost Input" />
-            <Input disabled placeholder="Disabled Input" />
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            <Input placeholder="Default input" />
+            <Input placeholder="Small input" size="sm" />
+            <Input placeholder="Large input" size="lg" />
+            <Input placeholder="Disabled input" disabled />
+            <Input placeholder="Ghost input" variant="ghost" />
           </div>
         }
       />
@@ -771,8 +953,29 @@ function App() {
       <ComponentShowcase
         title="OTP Input"
         preview={<OtpInput value={otp} onChange={setOtp} length={6} />}
-        code={`<OtpInput value={otp} onChange={setOtp} length={6} />`}
-        variants={<OtpInput value={otp} onChange={setOtp} length={4} />}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<OtpInput value={otp} onChange={setOtp} length={6} />`}
+            </code>
+            <button
+              onClick={() => {
+                copyToClipboard(
+                  `<OtpInput value={otp} onChange={setOtp} length={6} />`
+                );
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
       />
     ),
   };

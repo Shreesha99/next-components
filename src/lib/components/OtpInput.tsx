@@ -41,11 +41,20 @@ export const OtpInput: React.FC<OtpInputProps> = ({
     if (e.key === "Backspace") {
       e.preventDefault();
 
-      const current = value[i];
-      const updated = value.substring(0, i) + "" + value.substring(i + 1);
-      onChange(updated);
+      const currentValue = value[i];
 
-      if (!current && i > 0) {
+      if (currentValue) {
+        // Delete current character and move to previous
+        const updated = value.substring(0, i) + "" + value.substring(i + 1);
+        onChange(updated);
+
+        if (i > 0) {
+          setTimeout(() => {
+            inputsRef.current[i - 1]?.focus();
+          }, 0); // small delay so focus happens after re-render
+        }
+      } else if (i > 0) {
+        // If already empty, just go back
         inputsRef.current[i - 1]?.focus();
       }
     }
@@ -73,7 +82,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({
   };
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-3", className)}>
       {Array.from({ length }).map((_, i) => (
         <input
           key={i}
@@ -87,7 +96,9 @@ export const OtpInput: React.FC<OtpInputProps> = ({
           ref={(el) => {
             inputsRef.current[i] = el;
           }}
-          className="w-10 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 text-lg"
+          className={cn(
+            "w-12 h-14 text-center rounded-xl border border-gray-300 text-lg font-medium shadow-sm transition focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
+          )}
         />
       ))}
     </div>

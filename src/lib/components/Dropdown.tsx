@@ -9,14 +9,21 @@ interface DropdownProps {
   placeholder?: string;
 }
 
-export function Dropdown({ options, selected, onSelect, placeholder = "Select an option" }: DropdownProps) {
+export function Dropdown({
+  options,
+  selected,
+  onSelect,
+  placeholder = "Select an option",
+}: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -28,18 +35,18 @@ export function Dropdown({ options, selected, onSelect, placeholder = "Select an
     <div ref={dropdownRef} className="relative inline-block w-56">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center justify-between w-full px-4 py-2 border rounded-md bg-white shadow-md hover:bg-gray-100"
+        className="flex items-center justify-between w-full px-4 py-2 border rounded-md bg-white hover:bg-gray-100 transition"
       >
-        <span>{selected || placeholder}</span>
+        <span className="text-gray-800">{selected || placeholder}</span>
         <ChevronDown className="w-5 h-5 text-gray-600" />
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-full bg-white shadow-lg rounded-md border z-50">
+        <div className="absolute left-0 mt-2 w-full bg-white border rounded-md z-50">
           {options.map((option) => (
             <button
               key={option}
-              className="w-full text-left px-4 py-2 hover:bg-gray-200"
+              className="w-full text-left px-4 py-2 hover:bg-gray-100 transition"
               onClick={() => {
                 onSelect?.(option);
                 setIsOpen(false);

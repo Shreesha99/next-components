@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **1.1.6**  
+> 🎉 Version: **1.1.8**  
 > ✨ New in this release: Major styling changes for multiple components
