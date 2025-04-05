@@ -419,7 +419,7 @@ function App() {
           </Accordion>
         }
         code={
-          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
             <code className="w-auto block whitespace-pre-wrap">
               {`<Accordion title="Default" variant="default" theme="default">
       This is the default accordion shown in the preview tab.
@@ -431,7 +431,7 @@ function App() {
       This is the default accordion shown in the preview tab.
     </Accordion>`)
               }
-              className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+              className="absolute top-2 right-2 p-1 rounded  border border-gray-300 hover:bg-gray-50 transition"
             >
               {copied ? (
                 <FiCheck className="text-green-500 w-4 h-4" />
@@ -465,13 +465,36 @@ function App() {
     Alerts: (
       <ComponentShowcase
         title="Alerts"
-        preview={<Alert variant="success">Success Alert</Alert>}
-        code={`<Alert variant="success">Success Alert</Alert>`}
+        preview={<Alert variant="success">Success Alert (Preview)</Alert>}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Alert variant="success">Success Alert (Preview)</Alert>`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Alert variant="success">Success Alert (Preview)</Alert>`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <>
-            <Alert variant="warning">Warning Alert</Alert>
-            <Alert variant="destructive">Destructive Alert</Alert>
-          </>
+          <div className="space-y-3">
+            <Alert variant="default">Neutral information alert</Alert>
+            <Alert variant="info">This is an info alert</Alert>
+            <Alert variant="success">This is a success alert</Alert>
+            <Alert variant="warning">This is a warning alert</Alert>
+            <Alert variant="destructive">This is a destructive alert</Alert>
+          </div>
         }
       />
     ),
@@ -484,15 +507,45 @@ function App() {
             <AlertDialog
               isOpen={isDialogOpen}
               title="Confirm"
-              description="Are you sure?"
+              description="Are you sure you want to proceed with this action?"
               onClose={() => setIsDialogOpen(false)}
             />
           </>
         }
-        code={`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>\n<AlertDialog isOpen={isDialogOpen} title="Confirm" description="Are you sure?" onClose={() => setIsDialogOpen(false)} />`}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="block whitespace-pre-wrap">
+              {`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
+    <AlertDialog
+      isOpen={isDialogOpen}
+      title="Confirm"
+      description="Are you sure you want to proceed with this action?"
+      onClose={() => setIsDialogOpen(false)}
+    />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
+    <AlertDialog
+      isOpen={isDialogOpen}
+      title="Confirm"
+      description="Are you sure you want to proceed with this action?"
+      onClose={() => setIsDialogOpen(false)}
+    />`)
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <>
-            <Button onClick={() => setIsDialogOpen(true)}>
+          <div className="space-y-3">
+            <Button onClick={() => setIsDialogOpen(true)} variant="destructive">
               Trigger Danger Dialog
             </Button>
             <AlertDialog
@@ -501,7 +554,7 @@ function App() {
               description="This action is irreversible!"
               onClose={() => setIsDialogOpen(false)}
             />
-          </>
+          </div>
         }
       />
     ),
@@ -509,22 +562,58 @@ function App() {
       <ComponentShowcase
         title="Avatar"
         preview={
-          <Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />
-        }
-        code={`<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`}
-        variants={
-          <>
+          <div className="flex justify-start">
             <Avatar
               src="https://i.pravatar.cc/150"
               alt="User Avatar"
+              size="md"
+            />
+          </div>
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
+        variants={
+          <div className="flex flex-col gap-4 justify-start">
+            <Avatar
+              src="https://i.pravatar.cc/150?img=1"
+              alt="Small Avatar"
+              size="sm"
+            />
+            <Avatar
+              src="https://i.pravatar.cc/150?img=2"
+              alt="Medium Avatar"
+              size="md"
+            />
+            <Avatar
+              src="https://i.pravatar.cc/150?img=3"
+              alt="Large Avatar"
               size="lg"
             />
             <Avatar
-              src="https://i.pravatar.cc/150"
-              alt="User Avatar"
+              src="https://i.pravatar.cc/150?img=4"
+              alt="XL Avatar"
               size="xl"
             />
-          </>
+          </div>
         }
       />
     ),
@@ -532,20 +621,39 @@ function App() {
       <ComponentShowcase
         title="Buttons"
         preview={
-          <div className="flex space-x-2">
-            <Button variant={"primary"}>Primary</Button>
-            <Button variant={"secondary"}>Secondary</Button>
+          <div className="flex gap-3">
+            <Button variant="default">Default</Button>
           </div>
         }
-        code={`<Button variant={'primary'}>Primary</Button>\n<Button variant={'secondary'}>Secondary</Button>`}
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Button variant="default">Default</Button>`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Button variant="primary">Primary</Button>\n<Button variant="secondary">Secondary</Button>`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <div className="flex space-x-2">
-            <Button variant={"success"}>Success</Button>
-            <Button variant={"warning"}>Warning</Button>
-            <Button variant={"destructive"}>Destructive</Button>
-            <Button variant={"outline"}>Outline</Button>
-            <Button variant={"ghost"}>Ghost</Button>
-            <Button variant={"link"}>Link</Button>
+          <div className="flex gap-3">
+            <Button variant="success">Success</Button>
+            <Button variant="warning">Warning</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="link">Link</Button>
           </div>
         }
       />

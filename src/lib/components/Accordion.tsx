@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
+import { FiChevronUp } from "react-icons/fi";
 
 const accordionVariants = cva(
   "rounded-2xl border bg-white transition-colors duration-300",
@@ -70,7 +71,7 @@ export function Accordion({
           className="transform transition-transform"
           style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
         >
-          ▼
+          <FiChevronUp size={20} />
         </span>
       </button>
       <div

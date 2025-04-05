@@ -22,7 +22,11 @@ export function Avatar({ src, alt, size = "md", className }: AvatarProps) {
     <img
       src={src}
       alt={alt}
-      className={twMerge("rounded-full object-cover", sizeClasses[size], className)}
+      className={twMerge(
+        "rounded-full object-cover border border-black inline-block",
+        sizeClasses[size],
+        className
+      )}
     />
   );
 }
