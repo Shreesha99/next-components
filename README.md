@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **1.1.5**  
-> ✨ New in this release: Updating readme file for npm
+> 🎉 Version: **1.1.6**  
+> ✨ New in this release: Major styling changes for the Accordion

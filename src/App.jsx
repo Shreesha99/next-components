@@ -410,15 +410,55 @@ function App() {
       <ComponentShowcase
         title="Accordion"
         preview={
-          <Accordion title="Example" variant="primary">
-            Content
+          <Accordion
+            title="Default (Preview)"
+            variant="default"
+            theme="default"
+          >
+            This is the default accordion shown in the preview tab.
           </Accordion>
         }
-        code={`<Accordion title="Example" variant="primary">Content</Accordion>`}
+        code={
+          <pre className="relative bg-gray-100 text-sm p-4 rounded border border-gray-200 overflow-auto">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Accordion title="Default" variant="default" theme="default">
+      This is the default accordion shown in the preview tab.
+    </Accordion>`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(`<Accordion title="Default" variant="default" theme="default">
+      This is the default accordion shown in the preview tab.
+    </Accordion>`)
+              }
+              className="absolute top-2 right-2 p-1 rounded bg-white border border-gray-300 hover:bg-gray-50 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
         variants={
-          <Accordion title="Alternative" variant="secondary">
-            Different Look
-          </Accordion>
+          <div className="space-y-3">
+            <Accordion title="Default" variant="subtle" theme="default">
+              Basic layout with light styling.
+            </Accordion>
+            <Accordion title="Primary" variant="subtle" theme="primary">
+              Highlighted with a subtle blue header.
+            </Accordion>
+            <Accordion title="Success" variant="subtle" theme="success">
+              Indicates successful or completed sections.
+            </Accordion>
+            <Accordion title="Warning" variant="subtle" theme="warning">
+              Catches attention for warnings or alerts.
+            </Accordion>
+            <Accordion title="Destructive" variant="subtle" theme="destructive">
+              Cautionary styling for destructive actions.
+            </Accordion>
+          </div>
         }
       />
     ),
