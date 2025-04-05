@@ -1095,7 +1095,7 @@ function App() {
   return (
     <>
       {/* Top Navbar */}
-      <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-4 z-50 px-20 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-4 z-50 px-4 sm:px-20 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         {/* Logo + Name */}
         <div>
           <a href="#" className="flex items-center space-x-3">
@@ -1169,24 +1169,15 @@ function App() {
           >
             <Mail className="w-6 h-6" />
           </a>
-          {/* <button
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="rounded-full transition-all"
-          >
-            {theme === "light" ? (
-              <FiMoon size={24} className="text-gray-800" />
-            ) : (
-              <FiSun size={24} className="text-yellow-400" />
-            )}
-          </button> */}
         </div>
       </header>
 
-      <div className="flex h-screen bg-gray-100 dark:bg-black px-20">
+      <div className="flex h-screen bg-gray-100 dark:bg-black px-4 sm:px-20">
+        <main className="flex-1 overflow-auto relative scrollbar-hide py-25 px-6 border-r border-dotted border-gray-300 dark:border-gray-700 dark:bg-black text-black dark:text-white">
+          {introduction[selectedComponent] || components[selectedComponent]}
+        </main>
         <aside
-          className={`py-20 border-l border-r border-dotted border-gray-300 dark:border-gray-700 shadow-none p-6 transition-all duration-300 h-screen overflow-y-auto scrollbar-hide ${
-            isSidebarOpen ? "w-64" : "w-20"
-          }`}
+          className={`py-20 border-l border-r border-dotted border-gray-300 dark:border-gray-700 shadow-none p-6 transition-all duration-300 h-screen overflow-y-auto scrollbar-hide ${isSidebarOpen ? "w-64" : "w-20"}`}
         >
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -1208,11 +1199,7 @@ function App() {
                   <li key={key}>
                     <button
                       onClick={() => setSelectedComponent(key)}
-                      className={`block p-2 w-full text-left rounded ${
-                        selectedComponent === key
-                          ? "bg-gray-800 text-white"
-                          : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
-                      }`}
+                      className={`block p-2 w-full text-left rounded ${selectedComponent === key ? "bg-gray-800 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"}`}
                     >
                       {key}
                     </button>
@@ -1227,11 +1214,7 @@ function App() {
                   <li key={key}>
                     <button
                       onClick={() => setSelectedComponent(key)}
-                      className={`block p-2 w-full text-left rounded ${
-                        selectedComponent === key
-                          ? "bg-gray-800 text-white"
-                          : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
-                      }`}
+                      className={`block p-2 w-full text-left rounded ${selectedComponent === key ? "bg-gray-800 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"}`}
                     >
                       {key}
                     </button>
@@ -1241,10 +1224,6 @@ function App() {
             </>
           )}
         </aside>
-
-        <main className="flex-1 overflow-auto relative scrollbar-hide py-25 px-6 border-r border-dotted border-gray-300 dark:border-gray-700 dark:bg-black text-black dark:text-white">
-          {introduction[selectedComponent] || components[selectedComponent]}
-        </main>
       </div>
     </>
   );
