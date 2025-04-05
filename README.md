@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **2.0.0**  
-> ✨ New in this release: This version brings dark support for all existing components, Please note that every new component pushed after this update will have dark mode support incorporated by default
+> 🎉 Version: **3.0.0**  
+> ✨ New in this release: Adding hovercard as a new component

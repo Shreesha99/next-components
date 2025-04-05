@@ -24,6 +24,7 @@ import { Datepicker } from "@/lib/components/Datepicker";
 import { Dropdown } from "@/lib/components/Dropdown";
 import { Input } from "@/lib/components/Input";
 import { OtpInput } from "@/lib/components/OtpInput";
+import { HoverCard } from "@/lib/components/Hovercard";
 
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
@@ -991,6 +992,40 @@ function App() {
               onClick={() => {
                 copyToClipboard(
                   `<OtpInput value={otp} onChange={setOtp} length={6} />`
+                );
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
+              )}
+            </button>
+          </pre>
+        }
+      />
+    ),
+    Hovercard: (
+      <ComponentShowcase
+        title="Hover Card"
+        preview={
+          <HoverCard
+            title="Hover me"
+            content="This is the content shown when hovered!"
+          />
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`}
+            </code>
+            <button
+              onClick={() => {
+                copyToClipboard(
+                  `<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`
                 );
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1500);
