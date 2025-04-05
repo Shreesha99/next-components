@@ -1,6 +1,6 @@
 {
   "name": "drux-ui",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "description": "A beautiful, reusable component library for React apps built with TailwindCSS",
   "author": "Shreesha Venkatram",
   "license": "MIT",
@@ -37,6 +37,7 @@
     "dayjs": "^1.11.9",
     "drux-ui": "^1.0.0",
     "lucide-react": "^0.487.0",
+    "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.0.1",

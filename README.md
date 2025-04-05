@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **1.1.8**  
-> ✨ New in this release: Major styling changes for multiple components
+> 🎉 Version: **2.0.0**  
+> ✨ New in this release: This version brings dark support for all existing components, Please note that every new component pushed after this update will have dark mode support incorporated by default
