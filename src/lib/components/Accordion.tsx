@@ -4,11 +4,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { FiChevronUp } from "react-icons/fi";
 
 const accordionVariants = cva(
-  "rounded-2xl border bg-white transition-colors duration-300",
+  "rounded-2xl border bg-white dark:bg-gray-900 transition-colors duration-300",
   {
     variants: {
       variant: {
-        default: "border-gray-200",
+        default: "border-gray-200 dark:border-gray-700",
         subtle: "border-transparent shadow-sm",
       },
       size: {
@@ -24,13 +24,17 @@ const accordionVariants = cva(
   }
 );
 
-const headerVariants = {
-  default: "bg-gray-100 hover:bg-gray-200 text-gray-800",
-  primary: "bg-blue-100 hover:bg-blue-200 text-blue-800",
-  success: "bg-green-100 hover:bg-green-200 text-green-800",
-  warning: "bg-yellow-100 hover:bg-yellow-200 text-yellow-900",
-  destructive: "bg-red-100 hover:bg-red-200 text-red-800",
-  subtle: "bg-white hover:bg-gray-50 text-gray-800",
+const headerThemeClasses: Record<string, string> = {
+  default:
+    "bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100",
+  primary:
+    "bg-blue-100 hover:bg-blue-200 text-blue-800 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-100",
+  success:
+    "bg-green-100 hover:bg-green-200 text-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:text-green-100",
+  warning:
+    "bg-yellow-100 hover:bg-yellow-200 text-yellow-900 dark:bg-yellow-900 dark:hover:bg-yellow-800 dark:text-yellow-100",
+  destructive:
+    "bg-red-100 hover:bg-red-200 text-red-800 dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-100",
 };
 
 export function Accordion({
@@ -47,14 +51,6 @@ export function Accordion({
   theme?: "default" | "primary" | "success" | "warning" | "destructive";
 } & VariantProps<typeof accordionVariants>) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const headerThemeClasses: Record<string, string> = {
-    default: "bg-gray-100 text-gray-800",
-    primary: "bg-blue-100 text-blue-800",
-    success: "bg-green-100 text-green-800",
-    warning: "bg-yellow-100 text-yellow-800",
-    destructive: "bg-red-100 text-red-800",
-  };
 
   return (
     <div className={twMerge(accordionVariants({ variant, size }), className)}>
@@ -76,7 +72,7 @@ export function Accordion({
       </button>
       <div
         className={twMerge(
-          "transition-all overflow-hidden bg-white",
+          "transition-all overflow-hidden bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100",
           isOpen
             ? "max-h-96 px-4 py-3 rounded-b-2xl"
             : "max-h-0 px-4 py-0 opacity-0"

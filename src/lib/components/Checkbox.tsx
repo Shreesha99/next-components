@@ -13,8 +13,6 @@ export function Checkbox({
   onChange,
   ...props
 }: CheckboxProps) {
-  const isControlled = checked !== undefined;
-
   return (
     <label className="inline-flex items-center space-x-2 cursor-pointer">
       <input
@@ -28,14 +26,20 @@ export function Checkbox({
       <div
         className={twMerge(
           "w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all",
-          checked ? "bg-black border-black " : "border-gray-400 bg-white",
+          checked
+            ? "bg-black dark:bg-white border-black dark:border-white"
+            : "border-gray-400 bg-white dark:bg-gray-800 dark:border-gray-600",
           className
         )}
       >
-        {checked && <Check className="w-4 h-4 text-white" />}
+        {checked && <Check className="w-4 h-4 text-white dark:text-black" />}
       </div>
 
-      {label && <span className="text-sm text-gray-800">{label}</span>}
+      {label && (
+        <span className="text-sm text-gray-800 dark:text-gray-200">
+          {label}
+        </span>
+      )}
     </label>
   );
 }

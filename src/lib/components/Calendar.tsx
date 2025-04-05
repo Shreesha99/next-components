@@ -14,7 +14,6 @@ export function Calendar({ className, minDate, maxDate }: CalendarProps) {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const today = dayjs();
 
-  // Convert min and max to dayjs if they are Date
   const min = minDate ? dayjs(minDate) : null;
   const max = maxDate ? dayjs(maxDate) : null;
 
@@ -30,21 +29,30 @@ export function Calendar({ className, minDate, maxDate }: CalendarProps) {
 
   return (
     <div
-      className={twMerge("p-4 bg-white shadow-md rounded-xl w-80", className)}
+      className={twMerge(
+        "p-4 bg-white dark:bg-black text-gray-900 dark:text-gray-100 shadow-md rounded-xl w-80",
+        className
+      )}
     >
       <div className="flex justify-between items-center mb-4">
-        <button onClick={prevMonth} className="p-1 rounded hover:bg-gray-200">
+        <button
+          onClick={prevMonth}
+          className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
           <ChevronLeft size={20} />
         </button>
         <h2 className="text-lg font-semibold">
           {currentDate.format("MMMM YYYY")}
         </h2>
-        <button onClick={nextMonth} className="p-1 rounded hover:bg-gray-200">
+        <button
+          onClick={nextMonth}
+          className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
           <ChevronRight size={20} />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-center text-gray-600 text-sm font-medium">
+      <div className="grid grid-cols-7 text-center text-gray-600 dark:text-gray-400 text-sm font-medium">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div key={day} className="py-1">
             {day}
@@ -75,12 +83,12 @@ export function Calendar({ className, minDate, maxDate }: CalendarProps) {
               className={twMerge(
                 "p-2 rounded cursor-pointer transition",
                 isDisabled
-                  ? "text-gray-400 cursor-not-allowed"
+                  ? "text-gray-400 dark:text-gray-600 cursor-not-allowed"
                   : isSelected
-                    ? "bg-black text-white font-bold"
+                    ? "bg-black text-white font-bold dark:bg-white dark:text-black"
                     : isToday
-                      ? "bg-gray-200 text-black"
-                      : "hover:bg-gray-100"
+                      ? "bg-gray-200 text-black dark:bg-gray-700 dark:text-white"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-800"
               )}
             >
               {day}

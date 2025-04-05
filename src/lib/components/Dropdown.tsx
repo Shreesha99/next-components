@@ -35,18 +35,20 @@ export function Dropdown({
     <div ref={dropdownRef} className="relative inline-block w-56">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center justify-between w-full px-4 py-2 border rounded-md bg-white hover:bg-gray-100 transition"
+        className="flex items-center justify-between w-full px-4 py-2 border rounded-md bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
       >
-        <span className="text-gray-800">{selected || placeholder}</span>
-        <ChevronDown className="w-5 h-5 text-gray-600" />
+        <span className="text-gray-800 dark:text-gray-200">
+          {selected || placeholder}
+        </span>
+        <ChevronDown className="w-5 h-5 text-gray-600 dark:text-gray-400" />
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-full bg-white border rounded-md z-50">
+        <div className="absolute left-0 mt-2 w-full bg-white dark:bg-gray-800 border rounded-md z-50">
           {options.map((option) => (
             <button
               key={option}
-              className="w-full text-left px-4 py-2 hover:bg-gray-100 transition"
+              className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               onClick={() => {
                 onSelect?.(option);
                 setIsOpen(false);

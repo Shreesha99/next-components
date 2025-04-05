@@ -15,7 +15,10 @@ type BreadCrumbProps = {
 export function BreadCrumb({ items, separator = "/", className }: BreadCrumbProps) {
   return (
     <nav
-      className={twMerge("flex items-center text-sm text-gray-600", className)}
+      className={twMerge(
+        "flex items-center text-sm text-gray-600 dark:text-gray-300",
+        className
+      )}
       aria-label="Breadcrumb"
     >
       {items.map((item, index) => (
@@ -25,14 +28,16 @@ export function BreadCrumb({ items, separator = "/", className }: BreadCrumbProp
             className={twMerge(
               "hover:underline transition-colors duration-200",
               index === items.length - 1
-                ? "font-semibold text-gray-900"
-                : "text-gray-600"
+                ? "font-semibold text-gray-900 dark:text-white"
+                : "text-gray-600 dark:text-gray-300"
             )}
           >
             {item.label}
           </a>
           {index < items.length - 1 && (
-            <span className="mx-2 text-gray-400">{separator}</span>
+            <span className="mx-2 text-gray-400 dark:text-gray-500">
+              {separator}
+            </span>
           )}
         </div>
       ))}

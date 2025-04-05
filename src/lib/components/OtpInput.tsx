@@ -97,7 +97,9 @@ export const OtpInput: React.FC<OtpInputProps> = ({
             inputsRef.current[i] = el;
           }}
           className={cn(
-            "w-12 h-14 text-center rounded-xl border border-gray-300 text-lg font-medium shadow-sm transition focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
+            "w-12 h-14 text-center rounded-xl border text-lg font-medium shadow-sm transition focus:outline-none focus:ring-2 focus:ring-black focus:border-black",
+            "dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-500 dark:focus:border-gray-500",
+            "bg-white text-black border-gray-300 focus:ring-black focus:border-black"
           )}
         />
       ))}

@@ -22,8 +22,9 @@ export function Avatar({ src, alt, size = "md", className }: AvatarProps) {
     <img
       src={src}
       alt={alt}
+      loading="lazy"
       className={twMerge(
-        "rounded-full object-cover border border-black inline-block",
+        "rounded-full object-cover inline-block border border-gray-300 dark:border-gray-700",
         sizeClasses[size],
         className
       )}

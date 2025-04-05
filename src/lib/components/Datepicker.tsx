@@ -68,8 +68,8 @@ export function Datepicker({
             disabled
               ? "text-gray-400 cursor-not-allowed"
               : selected
-                ? "bg-black text-white font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-black text-white font-bold dark:bg-white dark:text-black"
+                : "hover:bg-gray-100 dark:hover:bg-gray-700"
           )}
           disabled={disabled}
         >
@@ -96,34 +96,40 @@ export function Datepicker({
     <div className={twMerge("relative inline-block", className)}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 border rounded-md bg-white hover:bg-gray-100"
+        className="flex items-center gap-2 px-4 py-2 border rounded-md bg-white hover:bg-gray-100 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800"
       >
-        <CalendarIcon className="w-5 h-5 text-gray-600" />
+        <CalendarIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
         {selectedDate.toDateString()}
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg p-4 z-10">
+        <div className="absolute left-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg p-4 z-10 shadow-lg dark:bg-gray-900 dark:border-gray-700">
           <div className="flex justify-between items-center mb-4">
             <button
               onClick={handlePrevMonth}
-              className="p-1 rounded hover:bg-gray-200"
+              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft
+                size={20}
+                className="text-gray-600 dark:text-gray-300"
+              />
             </button>
-            <h2 className="text-md font-semibold">
+            <h2 className="text-md font-semibold text-gray-800 dark:text-gray-100">
               {currentMonth.toLocaleString("default", { month: "long" })}{" "}
               {currentMonth.getFullYear()}
             </h2>
             <button
               onClick={handleNextMonth}
-              className="p-1 rounded hover:bg-gray-200"
+              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              <ChevronRight size={20} />
+              <ChevronRight
+                size={20}
+                className="text-gray-600 dark:text-gray-300"
+              />
             </button>
           </div>
 
-          <div className="grid grid-cols-7 gap-1 text-center text-gray-600 text-xs font-medium mb-2">
+          <div className="grid grid-cols-7 gap-1 text-center text-gray-600 dark:text-gray-400 text-xs font-medium mb-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div key={day} className="p-1">
                 {day}
