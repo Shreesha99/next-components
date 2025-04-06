@@ -25,6 +25,8 @@ import { Dropdown } from "@/lib/components/Dropdown";
 import { Input } from "@/lib/components/Input";
 import { OtpInput } from "@/lib/components/OtpInput";
 import { HoverCard } from "@/lib/components/Hovercard";
+import { Carousel } from "@/lib/components/Carousel";
+import { Card } from "@/lib/components/Card";
 
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
@@ -246,7 +248,7 @@ function App() {
             (cmd, index) => (
               <pre
                 key={cmd}
-                className="relative bg-gray-100 dark:bg-gray-800 text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto"
+                className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-auto"
               >
                 <code className="w-auto text-gray-800 dark:text-gray-200">
                   {cmd}
@@ -472,9 +474,9 @@ function App() {
         }
       />
     ),
-    Alerts: (
+    Alert: (
       <ComponentShowcase
-        title="Alerts"
+        title="Alert"
         preview={<Alert variant="success">Success Alert (Preview)</Alert>}
         code={
           <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
@@ -629,7 +631,7 @@ function App() {
     ),
     Button: (
       <ComponentShowcase
-        title="Buttons"
+        title="Button"
         preview={
           <div className="flex gap-3">
             <Button variant="default">Default</Button>
@@ -670,7 +672,7 @@ function App() {
     ),
     Badge: (
       <ComponentShowcase
-        title="Badges"
+        title="Badge"
         preview={
           <div className="flex justify-start">
             <Badge text="Success" variant="success" />
@@ -710,7 +712,7 @@ function App() {
     ),
     Breadcrumb: (
       <ComponentShowcase
-        title="BreadCrumb"
+        title="Breadcrumb"
         preview={
           <div className="flex justify-start">
             <BreadCrumb
@@ -795,6 +797,142 @@ function App() {
                 <FiCheck className="text-green-500 w-4 h-4" />
               ) : (
                 <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
+      />
+    ),
+    Card: (
+      <ComponentShowcase
+        title="Card"
+        preview={
+          <Card className="w-80">
+            <h3 className="text-lg font-semibold mb-2">Card Title</h3>
+            <p className="text-sm text-muted-foreground">
+              This is a default card.
+            </p>
+          </Card>
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Card className="w-80">
+      <h3 className="text-lg font-semibold mb-2">Card Title</h3>
+      <p className="text-sm text-muted-foreground">
+        This is a default card.
+      </p>
+    </Card>`}
+            </code>
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  `<Card className="w-80">
+      <h3 className="text-lg font-semibold mb-2">Card Title</h3>
+      <p className="text-sm text-muted-foreground">
+        This is a default card.
+      </p>
+    </Card>
+    
+    <Card variant="subtle" className="w-80">
+      <h3 className="text-lg font-semibold mb-2">Subtle Variant</h3>
+      <p className="text-sm text-muted-foreground">
+        Softer background, lighter border.
+      </p>
+    </Card>
+    
+    <Card variant="outline" className="w-80">
+      <h3 className="text-lg font-semibold mb-2">Outline Variant</h3>
+      <p className="text-sm text-muted-foreground">
+        Transparent background with clear border.
+      </p>
+    </Card>
+    
+    <Card variant="filled" className="w-80">
+      <h3 className="text-lg font-semibold mb-2">Filled Variant</h3>
+      <p className="text-sm text-muted-foreground">
+        Heavier background, no border.
+      </p>
+    </Card>`
+                )
+              }
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
+              )}
+            </button>
+          </pre>
+        }
+        variants={
+          <div className="flex flex-wrap gap-4">
+            <Card variant="subtle" className="w-64">
+              <h4 className="text-base font-medium mb-1">Subtle</h4>
+              <p className="text-xs text-muted-foreground">
+                Light background with soft border.
+              </p>
+            </Card>
+            <Card variant="outline" className="w-64">
+              <h4 className="text-base font-medium mb-1">Outline</h4>
+              <p className="text-xs text-muted-foreground">
+                Transparent background with outline.
+              </p>
+            </Card>
+            <Card variant="filled" className="w-64">
+              <h4 className="text-base font-medium mb-1">Filled</h4>
+              <p className="text-xs text-muted-foreground">
+                Solid background with no border.
+              </p>
+            </Card>
+          </div>
+        }
+      />
+    ),
+    Carousel: (
+      <ComponentShowcase
+        title="Carousel"
+        preview={
+          <Carousel
+            images={[
+              "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+              "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+            ]}
+          />
+        }
+        code={
+          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+            <code className="w-auto block whitespace-pre-wrap">
+              {`<Carousel
+      images={[
+        "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      ]}
+    />`}
+            </code>
+            <button
+              onClick={() => {
+                copyToClipboard(
+                  `<Carousel
+      images={[
+        "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      ]}
+    />`
+                );
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
+            >
+              {copied ? (
+                <FiCheck className="text-green-500 w-4 h-4" />
+              ) : (
+                <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
               )}
             </button>
           </pre>

@@ -1,41 +1,70 @@
 import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
-export function Carousel({ images, className }: { images: string[]; className?: string }) {
+interface CarouselProps {
+  images: string[];
+  className?: string;
+}
+
+export const Carousel: React.FC<CarouselProps> = ({ images, className }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevSlide = () => {
+  const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const nextSlide = () => {
+  const handleNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <div className={twMerge("relative w-full max-w-lg overflow-hidden rounded-lg", className)}>
-      {/* Image Slider */}
-      <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {images.map((src, index) => (
-          <img key={index} src={src} alt={`Slide ${index + 1}`} className="w-full object-cover rounded-lg" />
-        ))}
-      </div>
-
-      {/* Navigation Buttons */}
-      <button onClick={prevSlide} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-200">
-        <ChevronLeft size={24} />
-      </button>
-      <button onClick={nextSlide} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-200">
-        <ChevronRight size={24} />
+    <div
+      className={twMerge("flex items-center justify-center gap-2", className)}
+    >
+      {/* Left Arrow */}
+      <button
+        onClick={handlePrev}
+        className="px-3 py-2 rounded-md border shadow bg-background/80 backdrop-blur-sm hover:bg-muted transition cursor-pointer"
+      >
+        <ChevronLeft className="w-5 h-10 text-foreground" />
       </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
-          <div key={index} className={twMerge("w-2 h-2 rounded-full transition-all", currentIndex === index ? "bg-blue-600 scale-110" : "bg-gray-400")} />
-        ))}
+      {/* Carousel Image Container */}
+      <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden">
+        {/* Image Slider */}
+        <div className="w-full h-full overflow-hidden">
+          <div
+            className="flex h-full transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+              width: `${images.length * 100}%`,
+            }}
+          >
+            {images.map((src, index) => (
+              <div
+                key={index}
+                className="w-full flex-shrink-0 h-full"
+                style={{ width: "100%" }}
+              >
+                <img
+                  src={src}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Right Arrow */}
+      <button
+        onClick={handleNext}
+        className="px-3 py-2 rounded-md border shadow bg-background/80 backdrop-blur-sm hover:bg-muted transition cursor-pointer"
+      >
+        <ChevronRight className="w-5 h-10 text-foreground" />
+      </button>
     </div>
   );
-}
+};

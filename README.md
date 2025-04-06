@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **3.0.0**  
-> ✨ New in this release: Adding hovercard as a new component
+> 🎉 Version: **3.1.0**  
+> ✨ New in this release: Add Carousel and card components with multiple variants
