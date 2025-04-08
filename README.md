@@ -18,5 +18,5 @@ npm install drux-ui
 
 ```
 
-> 🎉 Version: **3.1.0**  
-> ✨ New in this release: Add Carousel and card components with multiple variants
+> 🎉 Version: **3.2.0**  
+> ✨ New in this release: This update brings some UI improvements to multiple components check github commits for further details
