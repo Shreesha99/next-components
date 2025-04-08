@@ -13,23 +13,22 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
-import { Button } from "@/lib/components/Button";
 import AccordionShowcase from "./showcases/accordion-showcase";
 import AlertShowcase from "./showcases/alert-showcase";
-import { Alert } from "@/lib/components/Alert";
-import { AlertDialog } from "@/lib/components/AlertDialog";
-import { Avatar } from "@/lib/components/Avatar";
-import { Badge } from "@/lib/components/Badge";
-import { BreadCrumb } from "@/lib/components/Breadcrumb";
-import { Calendar } from "@/lib/components/Calendar";
+import AlertDialogShowcase from "./showcases/alert-dialog-showcase";
+import AvatarShowcase from "./showcases/avatar-showcase";
+import ButtonShowcase from "./showcases/button-showcase";
+import BadgeShowcase from "./showcases/badge-showcase";
+import BreadCrumbShowcase from "./showcases/breadcrumb-showcase";
+import CalenderShowcase from "./showcases/calendar-showcase";
+import CardShowcase from "./showcases/card-showcase";
+import CarouselShowcase from "./showcases/carousel-showcase";
 import { Checkbox } from "@/lib/components/Checkbox";
 import { Datepicker } from "@/lib/components/Datepicker";
 import { Dropdown } from "@/lib/components/Dropdown";
 import { Input } from "@/lib/components/Input";
 import { OtpInput } from "@/lib/components/OtpInput";
 import { HoverCard } from "@/lib/components/Hovercard";
-import { Carousel } from "@/lib/components/Carousel";
-import { Card } from "@/lib/components/Card";
 
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
@@ -428,434 +427,62 @@ function App() {
   const components = {
     Accordion: <AccordionShowcase />,
     Alert: <AlertShowcase />,
-    AlertDialog: (
-      <ComponentShowcase
-        title="Alert Dialog"
-        preview={
-          <>
-            <Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
-            <AlertDialog
-              isOpen={isDialogOpen}
-              title="Confirm"
-              description="Are you sure you want to proceed with this action?"
-              onClose={() => setIsDialogOpen(false)}
-            />
-          </>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900">
-            <code className="block whitespace-pre-wrap text-gray-800 dark:text-gray-100">
-              {`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
-    <AlertDialog
-      isOpen={isDialogOpen}
-      title="Confirm"
-      description="Are you sure you want to proceed with this action?"
-      onClose={() => setIsDialogOpen(false)}
-    />`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(`<Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
-    <AlertDialog
-      isOpen={isDialogOpen}
-      title="Confirm"
-      description="Are you sure you want to proceed with this action?"
-      onClose={() => setIsDialogOpen(false)}
-    />`)
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="space-y-3">
-            <Button onClick={() => setIsDialogOpen(true)} variant="destructive">
-              Trigger Danger Dialog
-            </Button>
-            <AlertDialog
-              isOpen={isDialogOpen}
-              title="Danger"
-              description="This action is irreversible!"
-              onClose={() => setIsDialogOpen(false)}
-            />
-          </div>
-        }
-      />
-    ),
-    Avatar: (
-      <ComponentShowcase
-        title="Avatar"
-        preview={
-          <div className="flex justify-start">
-            <Avatar
-              src="https://i.pravatar.cc/150"
-              alt="User Avatar"
-              size="md"
-            />
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900">
-            <code className="w-auto block whitespace-pre-wrap text-gray-800 dark:text-gray-100">
-              {`<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Avatar src="https://i.pravatar.cc/150" alt="User Avatar" size="md" />`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-col gap-4 justify-start">
-            <Avatar
-              src="https://i.pravatar.cc/150?img=1"
-              alt="Small Avatar"
-              size="sm"
-            />
-            <Avatar
-              src="https://i.pravatar.cc/150?img=2"
-              alt="Medium Avatar"
-              size="md"
-            />
-            <Avatar
-              src="https://i.pravatar.cc/150?img=3"
-              alt="Large Avatar"
-              size="lg"
-            />
-            <Avatar
-              src="https://i.pravatar.cc/150?img=4"
-              alt="XL Avatar"
-              size="xl"
-            />
-          </div>
-        }
-      />
-    ),
-    Button: (
-      <ComponentShowcase
-        title="Button"
-        preview={
-          <div className="flex gap-3">
-            <Button variant="default">Default</Button>
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Button variant="default">Default</Button>`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Button variant="default">Default</Button>\n<Button variant="success">Success</Button>\n<Button variant="warning">Warning</Button>\n<Button variant="destructive">Destructive</Button>\n<Button variant="outline">Outline</Button>\n<Button variant="ghost">Ghost</Button>\n<Button variant="link">Link</Button>`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-wrap gap-3">
-            <Button variant="success">Success</Button>
-            <Button variant="warning">Warning</Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="link">Link</Button>
-          </div>
-        }
-      />
-    ),
-    Badge: (
-      <ComponentShowcase
-        title="Badge"
-        preview={
-          <div className="flex justify-start">
-            <Badge text="Success" variant="success" />
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="block whitespace-pre-wrap w-auto">
-              {codeSnippet}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(codeSnippet);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 2000);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex gap-3 justify-start">
-            <Badge text="Default" variant="default" />
-            <Badge text="Primary" variant="primary" />
-            <Badge text="Success" variant="success" />
-            <Badge text="Warning" variant="warning" />
-            <Badge text="Danger" variant="danger" />
-          </div>
-        }
-      />
-    ),
-    Breadcrumb: (
-      <ComponentShowcase
-        title="Breadcrumb"
-        preview={
-          <div className="flex justify-start">
-            <BreadCrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Products", href: "/products" },
-                { label: "Phones", href: "/products/phones" },
-              ]}
-            />
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900">
-            <code className="block whitespace-pre-wrap w-auto text-gray-800 dark:text-gray-100">
-              {`<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: "Phones", href: "/products/phones" }]} />`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<BreadCrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: "Phones", href: "/products/phones" }]} />`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-col gap-3 justify-start">
-            <BreadCrumb
-              items={[
-                { label: "Dashboard", href: "/dashboard" },
-                { label: "Settings", href: "/dashboard/settings" },
-              ]}
-              separator=">"
-            />
-            <BreadCrumb
-              items={[
-                { label: "Blog", href: "/blog" },
-                { label: "2025", href: "/blog/2025" },
-                { label: "April", href: "/blog/2025/april" },
-              ]}
-              separator="→"
-            />
-            <BreadCrumb
-              items={[
-                { label: "Files", href: "/files" },
-                { label: "Photos", href: "/files/photos" },
-                { label: "2024", href: "/files/photos/2024" },
-              ]}
-              separator="/"
-            />
-          </div>
-        }
-      />
-    ),
-    Calendar: (
-      <ComponentShowcase
-        title="Calendar"
-        preview={
-          <div className="flex justify-start">
-            <Calendar minDate={new Date()} />
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900">
-            <code className="block whitespace-pre-wrap text-gray-800 dark:text-gray-100">{`<Calendar minDate={new Date()}`}</code>
-            <button
-              onClick={() => {
-                copyToClipboard(`<Calendar minDate={new Date()}`);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-      />
-    ),
-    Card: (
-      <ComponentShowcase
-        title="Card"
-        preview={
-          <Card className="w-80">
-            <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-            <p className="text-sm text-muted-foreground">
-              This is a default card.
-            </p>
-          </Card>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Card className="w-80">
-      <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-      <p className="text-sm text-muted-foreground">
-        This is a default card.
-      </p>
-    </Card>`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Card className="w-80">
-      <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-      <p className="text-sm text-muted-foreground">
-        This is a default card.
-      </p>
-    </Card>
-    
-    <Card variant="subtle" className="w-80">
-      <h3 className="text-lg font-semibold mb-2">Subtle Variant</h3>
-      <p className="text-sm text-muted-foreground">
-        Softer background, lighter border.
-      </p>
-    </Card>
-    
-    <Card variant="outline" className="w-80">
-      <h3 className="text-lg font-semibold mb-2">Outline Variant</h3>
-      <p className="text-sm text-muted-foreground">
-        Transparent background with clear border.
-      </p>
-    </Card>
-    
-    <Card variant="filled" className="w-80">
-      <h3 className="text-lg font-semibold mb-2">Filled Variant</h3>
-      <p className="text-sm text-muted-foreground">
-        Heavier background, no border.
-      </p>
-    </Card>`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-wrap gap-4">
-            <Card variant="subtle" className="w-64">
-              <h4 className="text-base font-medium mb-1">Subtle</h4>
-              <p className="text-xs text-muted-foreground">
-                Light background with soft border.
-              </p>
-            </Card>
-            <Card variant="outline" className="w-64">
-              <h4 className="text-base font-medium mb-1">Outline</h4>
-              <p className="text-xs text-muted-foreground">
-                Transparent background with outline.
-              </p>
-            </Card>
-            <Card variant="filled" className="w-64">
-              <h4 className="text-base font-medium mb-1">Filled</h4>
-              <p className="text-xs text-muted-foreground">
-                Solid background with no border.
-              </p>
-            </Card>
-          </div>
-        }
-      />
-    ),
+    AlertDialog: <AlertDialogShowcase />,
+    Avatar: <AvatarShowcase />,
+    Button: <ButtonShowcase />,
+    Badge: <BadgeShowcase />,
+    Breadcrumb: <BreadCrumbShowcase />,
+    Calendar: <CalenderShowcase />,
+    Card: <CardShowcase />,
     Carousel: (
-      <ComponentShowcase
-        title="Carousel"
-        preview={
-          <Carousel
-            images={[
-              "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-              "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-              "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-            ]}
-          />
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Carousel
-      images={[
-        "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      ]}
-    />`}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(
-                  `<Carousel
-      images={[
-        "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      ]}
-    />`
-                );
-                setCopied(true);
-                setTimeout(() => setCopied(false), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
-              )}
-            </button>
-          </pre>
-        }
-      />
+      <CarouselShowcase />
+      //   <ComponentShowcase
+      //     title="Carousel"
+      //     preview={
+      //       <Carousel
+      //         images={[
+      //           "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      //           "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      //           "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      //         ]}
+      //       />
+      //     }
+      //     code={
+      //       <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+      //         <code className="w-auto block whitespace-pre-wrap">
+      //           {`<Carousel
+      //   images={[
+      //     "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      //     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      //     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      //   ]}
+      // />`}
+      //         </code>
+      //         <button
+      //           onClick={() => {
+      //             copyToClipboard(
+      //               `<Carousel
+      //   images={[
+      //     "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      //     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      //     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      //   ]}
+      // />`
+      //             );
+      //             setCopied(true);
+      //             setTimeout(() => setCopied(false), 1500);
+      //           }}
+      //           className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
+      //         >
+      //           {copied ? (
+      //             <FiCheck className="text-green-500 w-4 h-4" />
+      //           ) : (
+      //             <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
+      //           )}
+      //         </button>
+      //       </pre>
+      //     }
+      //   />
     ),
     Checkbox: (
       <ComponentShowcase

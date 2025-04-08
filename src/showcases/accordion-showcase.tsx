@@ -29,7 +29,6 @@ const AccordionShowcase = () => {
 
   return (
     <ComponentShowcase
-      docs="Hi"
       title="Accordion"
       preview={
         <Accordion title="Default" variant="default" theme="default">

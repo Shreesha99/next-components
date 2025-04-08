@@ -4,7 +4,6 @@ import { ComponentShowcase } from "./component-showcase";
 const AccordionShowcase = () => {
   return (
     <ComponentShowcase
-      docs="Hi"
       title="Accordion"
       preview={
         <Alert variant="solid" theme="default">

@@ -3,7 +3,6 @@ import { FiCopy, FiCheck } from "react-icons/fi";
 import { useClipboard } from "../hooks/useClipboard";
 
 interface ComponentShowcaseProps {
-  docs: string;
   title: string;
   preview: React.ReactNode;
   code: string;
@@ -11,7 +10,6 @@ interface ComponentShowcaseProps {
 }
 
 export function ComponentShowcase({
-  docs,
   title,
   preview,
   code,
