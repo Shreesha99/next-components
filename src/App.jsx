@@ -1068,14 +1068,14 @@ function App() {
           <div className="flex gap-3 dark:bg-gray-900 dark:text-white">
             <Input
               placeholder="Default input"
-              className="dark:bg-gray-800 dark:text-white"
+              variant="default"
             />
           </div>
         }
         code={
           <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-700">
             <code className="w-auto block whitespace-pre-wrap">
-              {`<Input placeholder="Default input" className="dark:bg-gray-800 dark:text-white" />`}
+              {`<Input placeholder="Default input" variant="default" />`}
             </code>
             <button
               onClick={() =>
