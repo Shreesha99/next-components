@@ -10,6 +10,8 @@ import {
   FiSearch,
   FiCheck,
   FiCopy,
+  FiMenu,
+  FiX,
 } from "react-icons/fi";
 import { Button } from "@/lib/components/Button";
 import { Accordion } from "@/lib/components/Accordion";
@@ -83,6 +85,10 @@ function App() {
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setSelectedComponent("welcome");
   }, []);
 
   function useClipboard() {
@@ -1232,90 +1238,163 @@ function App() {
 
   return (
     <>
+      {/* Mobile Hamburger (Top Left on small screens) */}
+      <button
+        className="fixed top-4 left-4 z-[60] sm:hidden text-gray-800 dark:text-white"
+        onClick={() => setIsSidebarOpen(true)}
+      >
+        <FiMenu size={24} />
+      </button>
+
       {/* Top Navbar */}
-      <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-4 z-50 px-4 sm:px-20 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        {/* Logo + Name */}
-        <div>
-          <a href="#" className="flex items-center space-x-3">
-            {/* Light mode logo */}
+      <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-4 z-50 px-4 sm:px-20">
+        <div className="flex items-center justify-between flex-wrap gap-y-2">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
             <img
               src="https://druxui.s3.ap-south-1.amazonaws.com/just-logo.png"
               alt="Drux UI Logo Light"
               className="h-8 block dark:hidden"
             />
-            {/* Dark mode logo */}
             <img
               src="https://druxui.s3.ap-south-1.amazonaws.com/just-logo-dark.png"
               alt="Drux UI Logo Dark"
               className="h-8 hidden dark:block"
             />
-            <span className="text-lg font-semibold text-gray-900 dark:text-white">
+            {/* Show 'Drux UI' only on sm and up */}
+            <span className="text-lg font-semibold text-gray-900 dark:text-white hidden sm:inline">
               Drux UI
-            </span>
-          </a>
-        </div>
-
-        {/* Search Bar */}
-        <div className="relative w-full max-w-md">
-          <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 shadow-sm border border-gray-200 dark:border-gray-700">
-            <FiSearch className="text-gray-500 dark:text-gray-400 mr-2" />
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Search components..."
-              value={searchTerm}
-              onChange={handleSearch}
-              className="bg-transparent w-full focus:outline-none text-sm text-black dark:text-white"
-            />
-            <span className="text-xs text-black dark:text-gray-300 ml-2 hidden sm:inline w-25 border border-gray-200 dark:border-gray-600 rounded px-2 py-0.5">
-              ⌘K / Ctrl K
             </span>
           </div>
 
-          {filteredResults.length > 0 && (
-            <ul className="absolute z-50 mt-2 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-              {filteredResults.map((item, index) => (
-                <li
-                  key={index}
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm text-gray-800 dark:text-gray-200"
-                  onClick={() => handleSelect(item.key)}
-                >
-                  <span className="font-medium dark:text-white">
-                    {item.key}
-                  </span>{" "}
-                  <span className="text-gray-400 dark:text-gray-500">
-                    ({item.type})
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+          {/* Search Bar */}
+          <div className="relative flex-1 max-w-md mx-2">
+            <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 shadow-sm border border-gray-200 dark:border-gray-700">
+              <FiSearch className="text-gray-500 dark:text-gray-400 mr-2" />
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search components..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="bg-transparent w-full focus:outline-none text-sm text-black dark:text-white"
+              />
+              <span className="text-xs text-black dark:text-gray-300 ml-2 hidden sm:inline w-25 border border-gray-200 dark:border-gray-600 rounded px-2 py-0.5">
+                ⌘K / Ctrl K
+              </span>
+            </div>
 
-        {/* Links */}
-        <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-300 mt-2 sm:mt-0">
-          <a
-            href="https://github.com/Shreesha99"
-            target="_blank"
-            className="hover:underline"
-          >
-            <Github className="w-6 h-6" />
-          </a>
-          <a
-            href="mailto:shreeshavenkatram99@gmail.com"
-            className="hover:underline"
-          >
-            <Mail className="w-6 h-6" />
-          </a>
+            {filteredResults.length > 0 && (
+              <ul className="absolute z-50 mt-2 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                {filteredResults.map((item, index) => (
+                  <li
+                    key={index}
+                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm text-gray-800 dark:text-gray-200"
+                    onClick={() => handleSelect(item.key)}
+                  >
+                    <span className="font-medium dark:text-white">
+                      {item.key}
+                    </span>{" "}
+                    <span className="text-gray-400 dark:text-gray-500">
+                      ({item.type})
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* GitHub + Mail */}
+          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-300">
+            <a
+              href="https://github.com/Shreesha99"
+              target="_blank"
+              className="hover:underline"
+            >
+              <Github className="w-6 h-6" />
+            </a>
+            <a
+              href="mailto:shreeshavenkatram99@gmail.com"
+              className="hover:underline"
+            >
+              <Mail className="w-6 h-6" />
+            </a>
+          </div>
         </div>
       </header>
+
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
+      {/* Mobile Sidebar Drawer */}
+      {isSidebarOpen && (
+        <aside className="fixed top-0 left-0 z-50 w-64 h-full bg-white dark:bg-gray-900 border-r border-gray-300 dark:border-gray-700 p-6 sm:hidden overflow-y-auto">
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="mb-4 text-black dark:text-white"
+          >
+            <FiX size={24} />
+          </button>
+          <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
+            Introduction
+          </h2>
+          <ul className="space-y-2 mb-4">
+            {Object.keys(introduction).map((key) => (
+              <li key={key}>
+                <button
+                  onClick={() => {
+                    setSelectedComponent(key);
+                    setIsSidebarOpen(false);
+                  }}
+                  className={`block p-2 w-full text-left rounded ${
+                    selectedComponent === key
+                      ? "bg-gray-800 text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
+                  }`}
+                >
+                  {key}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
+            Components
+          </h2>
+          <ul className="space-y-2">
+            {Object.keys(components).map((key) => (
+              <li key={key}>
+                <button
+                  onClick={() => {
+                    setSelectedComponent(key);
+                    setIsSidebarOpen(false);
+                  }}
+                  className={`block p-2 w-full text-left rounded ${
+                    selectedComponent === key
+                      ? "bg-gray-800 text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
+                  }`}
+                >
+                  {key}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
 
       <div className="flex h-screen bg-gray-100 dark:bg-black px-4 sm:px-20">
         <main className="flex-1 overflow-auto relative scrollbar-hide py-25 px-6 border-r border-dotted border-gray-300 dark:border-gray-700 dark:bg-black text-black dark:text-white">
           {introduction[selectedComponent] || components[selectedComponent]}
         </main>
         <aside
-          className={`py-20 border-l border-r border-dotted border-gray-300 dark:border-gray-700 shadow-none p-6 transition-all duration-300 h-screen overflow-y-auto scrollbar-hide ${isSidebarOpen ? "w-64" : "w-20"}`}
+          className={`py-20 border-l border-r border-dotted border-gray-300 dark:border-gray-700 shadow-none p-6 transition-all duration-300 h-screen overflow-y-auto scrollbar-hide hidden sm:block ${
+            isSidebarOpen ? "w-64" : "w-20"
+          }`}
         >
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -1337,7 +1416,11 @@ function App() {
                   <li key={key}>
                     <button
                       onClick={() => setSelectedComponent(key)}
-                      className={`block p-2 w-full text-left rounded ${selectedComponent === key ? "bg-gray-800 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"}`}
+                      className={`block p-2 w-full text-left rounded ${
+                        selectedComponent === key
+                          ? "bg-gray-800 text-white"
+                          : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
+                      }`}
                     >
                       {key}
                     </button>
@@ -1352,7 +1435,11 @@ function App() {
                   <li key={key}>
                     <button
                       onClick={() => setSelectedComponent(key)}
-                      className={`block p-2 w-full text-left rounded ${selectedComponent === key ? "bg-gray-800 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"}`}
+                      className={`block p-2 w-full text-left rounded ${
+                        selectedComponent === key
+                          ? "bg-gray-800 text-white"
+                          : "hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white"
+                      }`}
                     >
                       {key}
                     </button>
