@@ -14,7 +14,8 @@ import {
   FiX,
 } from "react-icons/fi";
 import { Button } from "@/lib/components/Button";
-import { Accordion } from "@/lib/components/Accordion";
+import AccordionShowcase from "./showcases/accordion-showcase";
+import AlertShowcase from "./showcases/alert-showcase";
 import { Alert } from "@/lib/components/Alert";
 import { AlertDialog } from "@/lib/components/AlertDialog";
 import { Avatar } from "@/lib/components/Avatar";
@@ -79,8 +80,7 @@ function App() {
   const [selected, setSelected] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme"));
-  const { resolvedTheme } = useTheme();
+  const [theme] = useState(() => localStorage.getItem("theme"));
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -423,99 +423,11 @@ function App() {
     ),
   };
 
+  const [copiedText, setCopied] = useState(false);
+
   const components = {
-    Accordion: (
-      <ComponentShowcase
-        title="Accordion"
-        preview={
-          <Accordion
-            title="Default (Preview)"
-            variant="default"
-            theme="default"
-          >
-            This is the default accordion shown in the preview tab.
-          </Accordion>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-800">
-            <code className="w-auto block whitespace-pre-wrap text-gray-800 dark:text-gray-100">
-              {`<Accordion title="Default" variant="default" theme="default">
-      This is the default accordion shown in the preview tab.
-    </Accordion>`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(`<Accordion title="Default" variant="default" theme="default">
-      This is the default accordion shown in the preview tab.
-    </Accordion>`)
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="space-y-3">
-            <Accordion title="Default" variant="subtle" theme="default">
-              Basic layout with light styling.
-            </Accordion>
-            <Accordion title="Primary" variant="subtle" theme="primary">
-              Highlighted with a subtle blue header.
-            </Accordion>
-            <Accordion title="Success" variant="subtle" theme="success">
-              Indicates successful or completed sections.
-            </Accordion>
-            <Accordion title="Warning" variant="subtle" theme="warning">
-              Catches attention for warnings or alerts.
-            </Accordion>
-            <Accordion title="Destructive" variant="subtle" theme="destructive">
-              Cautionary styling for destructive actions.
-            </Accordion>
-          </div>
-        }
-      />
-    ),
-    Alert: (
-      <ComponentShowcase
-        title="Alert"
-        preview={<Alert variant="success">Success Alert (Preview)</Alert>}
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Alert variant="success">Success Alert (Preview)</Alert>`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Alert variant="success">Success Alert (Preview)</Alert>`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="space-y-3">
-            <Alert variant="default">Neutral information alert</Alert>
-            <Alert variant="info">This is an info alert</Alert>
-            <Alert variant="success">This is a success alert</Alert>
-            <Alert variant="warning">This is a warning alert</Alert>
-            <Alert variant="destructive">This is a destructive alert</Alert>
-          </div>
-        }
-      />
-    ),
+    Accordion: <AccordionShowcase />,
+    Alert: <AlertShowcase />,
     AlertDialog: (
       <ComponentShowcase
         title="Alert Dialog"
@@ -1066,10 +978,7 @@ function App() {
         title="Input"
         preview={
           <div className="flex gap-3 dark:bg-gray-900 dark:text-white">
-            <Input
-              placeholder="Default input"
-              variant="default"
-            />
+            <Input placeholder="Default input" variant="default" />
           </div>
         }
         code={

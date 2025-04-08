@@ -74,11 +74,11 @@ export function Accordion({
         className={twMerge(
           "transition-all overflow-hidden bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100",
           isOpen
-            ? "max-h-96 px-4 py-3 rounded-b-2xl"
-            : "max-h-0 px-4 py-0 opacity-0"
+            ? "max-h-96 px-4 py-3 opacity-100 rounded-b-2xl"
+            : "max-h-0 px-0 py-0 opacity-0 pointer-events-none"
         )}
       >
-        {children}
+        {isOpen && children}
       </div>
     </div>
   );
