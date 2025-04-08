@@ -12,6 +12,8 @@ interface OtpInputProps {
   value: string;
   onChange: (value: string) => void;
   className?: string;
+  disabled?: boolean;
+  placeholder?: string;
 }
 
 export const OtpInput: React.FC<OtpInputProps> = ({
@@ -19,10 +21,14 @@ export const OtpInput: React.FC<OtpInputProps> = ({
   value,
   onChange,
   className,
+  disabled = false,
+  placeholder = "•",
 }) => {
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
+    if (disabled) return;
+
     const char = e.target.value.replace(/[^0-9]/g, "");
     if (!char) return;
 
@@ -38,23 +44,23 @@ export const OtpInput: React.FC<OtpInputProps> = ({
     e: React.KeyboardEvent<HTMLInputElement>,
     i: number
   ) => {
+    if (disabled) return;
+
     if (e.key === "Backspace") {
       e.preventDefault();
 
       const currentValue = value[i];
 
       if (currentValue) {
-        // Delete current character and move to previous
         const updated = value.substring(0, i) + "" + value.substring(i + 1);
         onChange(updated);
 
         if (i > 0) {
           setTimeout(() => {
             inputsRef.current[i - 1]?.focus();
-          }, 0); // small delay so focus happens after re-render
+          }, 0);
         }
       } else if (i > 0) {
-        // If already empty, just go back
         inputsRef.current[i - 1]?.focus();
       }
     }
@@ -71,6 +77,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({
   };
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    if (disabled) return;
     e.preventDefault();
     const paste = e.clipboardData
       .getData("text")
@@ -89,6 +96,8 @@ export const OtpInput: React.FC<OtpInputProps> = ({
           type="text"
           inputMode="numeric"
           maxLength={1}
+          disabled={disabled}
+          placeholder={placeholder}
           value={value[i] || ""}
           onChange={(e) => handleChange(e, i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
@@ -97,9 +106,10 @@ export const OtpInput: React.FC<OtpInputProps> = ({
             inputsRef.current[i] = el;
           }}
           className={cn(
-            "w-12 h-14 text-center rounded-xl border text-lg font-medium shadow-sm transition focus:outline-none focus:ring-2 focus:ring-black focus:border-black",
-            "dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-500 dark:focus:border-gray-500",
-            "bg-white text-black border-gray-300 focus:ring-black focus:border-black"
+            "w-12 h-14 text-center rounded-xl border text-lg font-medium shadow-sm transition focus:outline-none",
+            disabled
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed dark:bg-gray-700 dark:text-gray-400"
+              : "bg-white text-black border-gray-300 focus:ring-2 focus:ring-black focus:border-black dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-500 dark:focus:border-gray-500"
           )}
         />
       ))}

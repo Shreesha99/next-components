@@ -8,27 +8,27 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const inputVariants = cva(
-  "block w-full appearance-none transition-colors duration-200 border rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-500 dark:focus:border-gray-500 dark:placeholder:text-gray-500 dark:disabled:bg-gray-700",
+  "flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "",
-        primary: "",
-        secondary: "",
-        success: "",
-        warning: "",
-        destructive: "",
-        ghost: "border-transparent bg-transparent focus:ring-gray-300",
+        default: "border-gray-300",
+        primary: "border-blue-500",
+        secondary: "border-purple-500",
+        success: "border-green-500",
+        warning: "border-yellow-500",
+        destructive: "border-red-500",
+        ghost: "border-transparent",
       },
-      size: {
-        sm: "px-3 py-1.5 text-sm",
-        md: "px-4 py-2 text-base",
-        lg: "px-5 py-3 text-lg",
+      inputSize: {
+        sm: "h-8 text-sm px-2",
+        md: "h-10 text-base px-3",
+        lg: "h-12 text-lg px-4",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "md",
+      inputSize: "md",
     },
   }
 );
@@ -36,7 +36,7 @@ const inputVariants = cva(
 export function Input({
   className,
   variant,
-  size,
+  inputSize,
   disabled,
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> &
@@ -45,7 +45,7 @@ export function Input({
     <input
       {...props}
       disabled={disabled}
-      className={cn(inputVariants({ variant, size }), className)}
+      className={cn(inputVariants({ variant, inputSize }), className)}
     />
   );
 }

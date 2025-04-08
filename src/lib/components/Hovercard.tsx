@@ -40,7 +40,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
             "top-full left-1/2 transform -translate-x-1/2",
             "w-60 p-4 bg-white border border-gray-300 rounded-lg shadow-md",
             "dark:bg-gray-800 dark:text-white dark:border-gray-600",
-            "opacity-100 scale-100"
+            "opacity-100 scale-100 z-1000"
           )}
         >
           <p>{content}</p>

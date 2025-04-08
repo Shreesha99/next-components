@@ -23,12 +23,12 @@ import BreadCrumbShowcase from "./showcases/breadcrumb-showcase";
 import CalenderShowcase from "./showcases/calendar-showcase";
 import CardShowcase from "./showcases/card-showcase";
 import CarouselShowcase from "./showcases/carousel-showcase";
-import { Checkbox } from "@/lib/components/Checkbox";
-import { Datepicker } from "@/lib/components/Datepicker";
-import { Dropdown } from "@/lib/components/Dropdown";
-import { Input } from "@/lib/components/Input";
-import { OtpInput } from "@/lib/components/OtpInput";
-import { HoverCard } from "@/lib/components/Hovercard";
+import CheckboxShowcase from "./showcases/checkbox-showcase";
+import DatepickerShowcase from "./showcases/datepicker-showcase";
+import DropdownShowcase from "./showcases/dropdown-showcase";
+import InputShowcase from "./showcases/input-showcase";
+import OtpInputShowcase from "./showcases/otpinput-showcase";
+import HoverCardShowcase from "./showcases/hovercard-showcase";
 
 function ComponentShowcase({ title, preview, code, variants }) {
   const [activeTab, setActiveTab] = useState("preview");
@@ -434,293 +434,46 @@ function App() {
     Breadcrumb: <BreadCrumbShowcase />,
     Calendar: <CalenderShowcase />,
     Card: <CardShowcase />,
-    Carousel: (
-      <CarouselShowcase />
-      //   <ComponentShowcase
-      //     title="Carousel"
-      //     preview={
-      //       <Carousel
-      //         images={[
-      //           "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      //           "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      //           "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      //         ]}
-      //       />
-      //     }
-      //     code={
-      //       <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-      //         <code className="w-auto block whitespace-pre-wrap">
-      //           {`<Carousel
-      //   images={[
-      //     "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      //     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      //     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      //   ]}
-      // />`}
-      //         </code>
-      //         <button
-      //           onClick={() => {
-      //             copyToClipboard(
-      //               `<Carousel
-      //   images={[
-      //     "https://images.pexels.com/photos/31436082/pexels-photo-31436082/free-photo-of-serene-horse-grazing-in-rural-pasture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      //     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      //     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      //   ]}
-      // />`
-      //             );
-      //             setCopied(true);
-      //             setTimeout(() => setCopied(false), 1500);
-      //           }}
-      //           className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
-      //         >
-      //           {copied ? (
-      //             <FiCheck className="text-green-500 w-4 h-4" />
-      //           ) : (
-      //             <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
-      //           )}
-      //         </button>
-      //       </pre>
-      //     }
-      //   />
-    ),
-    Checkbox: (
-      <ComponentShowcase
-        title="Checkbox"
-        preview={
-          <Checkbox
-            label="Accept Terms & Conditions"
-            checked={checked}
-            onChange={(e) => setChecked(e.target.checked)}
-          />
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Checkbox
-      label="Accept Terms"
-      checked={checked}
-      onChange={(e) => setChecked(e.target.checked)}
-    />`}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(
-                  `<Checkbox
-      label="Accept Terms"
-      checked={checked}
-      onChange={(e) => setChecked(e.target.checked)}
-    />`
-                );
-                setCopied(true);
-                setTimeout(() => setCopied(false), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-col gap-4">
-            <Checkbox label="Checked by Default" checked readOnly />
-            <Checkbox label="Disabled" disabled />
-            <Checkbox />
-          </div>
-        }
-      />
-    ),
-    Datepicker: (
-      <ComponentShowcase
-        title="Datepicker"
-        preview={<Datepicker value={date} onChange={setDate} />}
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 dark:border-gray-700 overflow-auto bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Datepicker value={date} onChange={setDate} />`}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(
-                  `<Datepicker value={date} onChange={setDate} />`
-                );
-                setCopied("Datepicker");
-                setTimeout(() => setCopied(""), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {copied === "Datepicker" ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-      />
-    ),
-    Dropdown: (
-      <ComponentShowcase
-        title="Dropdown"
-        preview={
-          <Dropdown
-            options={["Apple", "Banana", "Cherry"]}
-            selected={selected}
-            onSelect={setSelected}
-          />
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Dropdown
-      options={["Apple", "Banana", "Cherry"]}
-      selected={selected}
-      onSelect={setSelected}
-    />`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Dropdown options={["Apple", "Banana", "Cherry"]} selected={selected} onSelect={setSelected} />`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-600 transition"
-            >
-              {copied === "Dropdown" ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 dark:text-gray-300 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-      />
-    ),
-    Input: (
-      <ComponentShowcase
-        title="Input"
-        preview={
-          <div className="flex gap-3 dark:bg-gray-900 dark:text-white">
-            <Input placeholder="Default input" variant="default" />
-          </div>
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-700">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<Input placeholder="Default input" variant="default" />`}
-            </code>
-            <button
-              onClick={() =>
-                copyToClipboard(
-                  `<Input placeholder="Default input" className="dark:bg-gray-800 dark:text-white" />\n<Input placeholder="Disabled input" disabled className="dark:bg-gray-700 dark:text-gray-400" />`
-                )
-              }
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 w-4 h-4" />
-              )}
-            </button>
-          </pre>
-        }
-        variants={
-          <div className="flex flex-col gap-4 w-full max-w-sm dark:bg-gray-900 dark:text-white">
-            <Input
-              placeholder="Default input"
-              className="dark:bg-gray-800 dark:text-white"
-            />
-            <Input
-              placeholder="Small input"
-              size="sm"
-              className="dark:bg-gray-800 dark:text-white"
-            />
-            <Input
-              placeholder="Large input"
-              size="lg"
-              className="dark:bg-gray-800 dark:text-white"
-            />
-            <Input
-              placeholder="Disabled input"
-              disabled
-              className="dark:bg-gray-700 dark:text-gray-400"
-            />
-            <Input
-              placeholder="Ghost input"
-              variant="ghost"
-              className="dark:bg-transparent dark:text-white dark:border-transparent dark:focus:ring-gray-500"
-            />
-          </div>
-        }
-      />
-    ),
-    OtpInput: (
-      <ComponentShowcase
-        title="OTP Input"
-        preview={<OtpInput value={otp} onChange={setOtp} length={6} />}
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<OtpInput value={otp} onChange={setOtp} length={6} />`}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(
-                  `<OtpInput value={otp} onChange={setOtp} length={6} />`
-                );
-                setCopied(true);
-                setTimeout(() => setCopied(false), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
-              )}
-            </button>
-          </pre>
-        }
-      />
-    ),
+    Carousel: <CarouselShowcase />,
+    Checkbox: <CheckboxShowcase />,
+    Datepicker: <DatepickerShowcase />,
+    Dropdown: <DropdownShowcase />,
+    Input: <InputShowcase />,
+    OtpInput: <OtpInputShowcase />,
     Hovercard: (
-      <ComponentShowcase
-        title="Hover Card"
-        preview={
-          <HoverCard
-            title="Hover me"
-            content="This is the content shown when hovered!"
-          />
-        }
-        code={
-          <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-            <code className="w-auto block whitespace-pre-wrap">
-              {`<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`}
-            </code>
-            <button
-              onClick={() => {
-                copyToClipboard(
-                  `<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`
-                );
-                setCopied(true);
-                setTimeout(() => setCopied(false), 1500);
-              }}
-              className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
-            >
-              {copied ? (
-                <FiCheck className="text-green-500 w-4 h-4" />
-              ) : (
-                <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
-              )}
-            </button>
-          </pre>
-        }
-      />
+      <HoverCardShowcase />
+      // <ComponentShowcase
+      //   title="Hover Card"
+      //   preview={
+      //     <HoverCard
+      //       title="Hover me"
+      //       content="This is the content shown when hovered!"
+      //     />
+      //   }
+      //   code={
+      //     <pre className="relative text-sm p-4 rounded border border-gray-200 overflow-auto bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+      //       <code className="w-auto block whitespace-pre-wrap">
+      //         {`<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`}
+      //       </code>
+      //       <button
+      //         onClick={() => {
+      //           copyToClipboard(
+      //             `<HoverCard title="Hover Me" content="This is the content shown when hovered!" />`
+      //           );
+      //           setCopied(true);
+      //           setTimeout(() => setCopied(false), 1500);
+      //         }}
+      //         className="absolute top-2 right-2 p-1 rounded border border-gray-300 hover:bg-gray-50 transition dark:border-gray-600 dark:hover:bg-gray-700"
+      //       >
+      //         {copied ? (
+      //           <FiCheck className="text-green-500 w-4 h-4" />
+      //         ) : (
+      //           <FiCopy className="text-gray-600 w-4 h-4 dark:text-gray-300" />
+      //         )}
+      //       </button>
+      //     </pre>
+      //   }
+      // />
     ),
   };
 

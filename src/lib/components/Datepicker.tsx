@@ -1,4 +1,4 @@
-import React, { JSX, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import {
   Calendar as CalendarIcon,
   ChevronLeft,
@@ -12,6 +12,7 @@ interface DatepickerProps {
   minDate?: Date;
   maxDate?: Date;
   className?: string;
+  placeholder?: string;
 }
 
 export function Datepicker({
@@ -20,10 +21,18 @@ export function Datepicker({
   minDate,
   maxDate,
   className,
+  placeholder = "Select a date",
 }: DatepickerProps) {
-  const [selectedDate, setSelectedDate] = useState(value || new Date());
-  const [currentMonth, setCurrentMonth] = useState(new Date(selectedDate));
+  const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
+  const [currentMonth, setCurrentMonth] = useState<Date>(value ?? new Date());
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (value) {
+      setSelectedDate(value);
+      setCurrentMonth(value);
+    }
+  }, [value]);
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
@@ -41,7 +50,8 @@ export function Datepicker({
     a.toDateString() === b.toDateString();
 
   const isDisabled = (date: Date) =>
-    (minDate && date < minDate) || (maxDate && date > maxDate);
+    (minDate && date < new Date(minDate.setHours(0, 0, 0, 0))) ||
+    (maxDate && date > new Date(maxDate.setHours(23, 59, 59, 999)));
 
   const renderDays = () => {
     const days: JSX.Element[] = [];
@@ -56,27 +66,28 @@ export function Datepicker({
 
     for (let i = 1; i <= daysInMonth; i++) {
       const date = new Date(year, month, i);
-      const selected = isSameDate(date, selectedDate);
-      const disabled = isDisabled(date);
+      const selected = selectedDate && isSameDate(date, selectedDate);
+      const dateIsDisabled = isDisabled(date);
 
       days.push(
         <button
           key={i}
-          onClick={() => !disabled && handleDateClick(date)}
+          onClick={() => !dateIsDisabled && handleDateClick(date)}
           className={twMerge(
             "w-10 h-10 text-sm rounded-md flex items-center justify-center transition",
-            disabled
+            dateIsDisabled
               ? "text-gray-400 cursor-not-allowed"
               : selected
                 ? "bg-black text-white font-bold dark:bg-white dark:text-black"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700"
           )}
-          disabled={disabled}
+          disabled={dateIsDisabled}
         >
           {i}
         </button>
       );
     }
+
     return days;
   };
 
@@ -96,10 +107,15 @@ export function Datepicker({
     <div className={twMerge("relative inline-block", className)}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 border rounded-md bg-white hover:bg-gray-100 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800"
+        className={twMerge(
+          "flex items-center gap-2 px-4 py-2 border rounded-md w-full text-left transition",
+          "bg-white hover:bg-gray-100 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800"
+        )}
       >
         <CalendarIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-        {selectedDate.toDateString()}
+        <span className={!selectedDate ? "text-gray-400" : ""}>
+          {selectedDate ? selectedDate.toDateString() : placeholder}
+        </span>
       </button>
 
       {isOpen && (
