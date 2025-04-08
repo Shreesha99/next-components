@@ -1062,7 +1062,7 @@ function App() {
           <div className="flex gap-3 dark:bg-gray-900 dark:text-white">
             <Input
               placeholder="Default input"
-              className="dark:bg-gray-800 dark:text-white"
+              variant="default"
             />
           </div>
         }
