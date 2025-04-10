@@ -78,7 +78,7 @@ export function Accordion({
             : "max-h-0 px-0 py-0 opacity-0 pointer-events-none"
         )}
       >
-        {isOpen && children}
+        {children} {/* <-- Keep children always rendered */}
       </div>
     </div>
   );

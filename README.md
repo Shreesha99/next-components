@@ -19,4 +19,4 @@ npm install drux-ui
 ```
 
 > 🎉 Version: **3.2.0**  
-> ✨ New in this release: This update brings Major fixes to the build of the library
+> ✨ New in this release: This update a patch fix for testing the package usage

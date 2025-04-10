@@ -7,7 +7,7 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
-import { ThemeProvider } from "next-themes"; // ✅ Import this
+import { ThemeProvider } from "next-themes"; // 
 import "./styles.css";
 import reportWebVitals from "./reportWebVitals.js";
 import App from "./App.jsx";
